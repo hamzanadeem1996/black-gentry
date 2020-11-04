@@ -1,0 +1,189 @@
+<p style="display:none;"> <%
+    if(data.dataValues.profileOfUser == null) { 
+        userProfile = 'null'
+    } else {
+        userProfile = data.dataValues.profileOfUser.dataValues
+    } %>
+</p>
+<p style="display:none;"> <%
+    if(data.dataValues.subscriptionForUser == null) { 
+        subscriptionProfile = 'null'
+    } else {
+        subscriptionProfile = data.dataValues.subscriptionForUser.dataValues
+    } %>
+</p>
+<p style="display:none;"> <% ImageProfile = data.dataValues.ImageForUser %> </p>
+<div class="page-content container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-body">
+                <h1 align="center"> Subscriptions Detail Page </h1>
+
+                <div class="row">
+
+                    <div class="col-sm-12 col-xs-12">
+
+                        <div class="form-group col-sm-4"><br /><br />
+                            <h2>Details : </h2>
+                        </div>
+                        <br /><br />
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail111">Email</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail111"
+                                        value="<%- data.dataValues.email %>" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail12">Name</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="email" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.name %>" disabled>
+                                    <% } else { %>
+                                    <input type="email" class="form-control" id="exampleInputEmail12" value="-"
+                                        disabled>
+                                    <% } %>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail12">Gender</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.gender %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail12">Subscription Id</label>
+                                    <% if(subscriptionProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- subscriptionProfile.subscriptionId %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail12">Device</label>
+                                    <% if(subscriptionProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- subscriptionProfile.loginType %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail12">Order Id </label>
+                                    <% if(subscriptionProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- subscriptionProfile.orderId %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail12">Purchase Token</label>
+                                    <% if(subscriptionProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- subscriptionProfile.purchaseToken %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail12">Purchase Time</label>
+                                    <% if(subscriptionProfile != 'null') {  %>
+
+                                    <% 
+                                       var usaTime = subscriptionProfile.purchaseTime .toLocaleString("en-US", {timeZone: "America/New_York"});
+                                        usaTime = new Date(usaTime);
+                                        console.log('USA time: '+usaTime.toLocaleString())
+                                       %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- usaTime.toLocaleString() %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail12">Signature</label>
+                                    <% if(subscriptionProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- subscriptionProfile.signature %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail12">Purchase State</label>
+                                    <% if(subscriptionProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- subscriptionProfile.purchaseState %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail12">Auto Renewing</label>
+                                    <% if(subscriptionProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- subscriptionProfile.autoRenewing %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail12">Price</label>
+                                    <% if(subscriptionProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- subscriptionProfile.price %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <label for="exampleInputEmail12">Susbscription Period (in months)</label>
+                                    <% if(subscriptionProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- subscriptionProfile.subscriptionPeriod %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="exampleInputEmail12">Subscription Status</label>
+                                    <% if(subscriptionProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- subscriptionProfile.subscriptionStatus %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- row -->
+</div>

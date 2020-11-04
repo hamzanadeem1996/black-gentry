@@ -1,0 +1,1417 @@
+{
+  "swagger": "2.0",
+  "title" : "Videe Chatting App",
+  "description" : "App for Dating",
+  "basePath": "/api",
+  "license": {
+    "name": "MIT",
+    "url": "https://opensource.org/licenses/MIT"
+  },
+  "version": "1.0.0",
+  "securityDefinitions":{
+    "basicAuth": {
+        "type": "basic"
+    }
+  },
+  "produces": ["application/json"],
+  "paths" :{
+    "/users/login":{
+      "post":{
+        "tags": ["Auth"],
+        "summary": "API Endpoint to Login or Register user account",
+        "description" : "Login users",
+        "parameters":[
+          {
+            "name": "param",
+            "description": "User params to login",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/login"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/users/linkedin":{
+      "post":{
+        "tags": ["Auth"],
+        "summary": "API Endpoint to Login with Linkedin account",
+        "description" : "Login Linkedin users",
+        "parameters":[
+          {
+            "name": "param",
+            "description": "User params to login",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/linkedin"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/users/logout":{
+      "get":{
+        "tags": ["Auth"],
+        "summary": "API Endpoint to Logout from user account",
+        "description" : "Logout users",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+   "/users/resendOtp":{
+    "post":{
+      "tags": ["Auth"],
+      "summary": "API Endpoint to Resend OTP",
+      "description" : "Resend OTP",
+      "parameters":[
+        {
+          "name": "param",
+          "description": "User params to resend OTP",
+          "in": "body",
+          "required": "true",
+          "schema" : {
+            "$ref" : "#definitions/resendOtp"
+          }
+        }
+      ],
+      "produces" : ["application/json"],
+      "responses":{
+        "200":
+          {"description": "Returns user"},
+        "404":
+          {"description": "Somthing went wrong"}
+      }
+    }
+  },
+    "/users/verifyOtp":{
+      "post":{
+        "tags": ["Auth"],
+        "summary": "API Endpoint for Verifying User",
+        "description" : "Verifying User",
+        "parameters":[
+          {
+            "name": "param",
+            "description": "Params for Verifying User",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/verifyOtp"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      } 
+    },
+    "/users/roles":{
+      "get":{
+        "tags": ["Auth"],
+        "summary": "API Endpoint for Roles list",
+        "description" : "Roles list",
+        "parameters":[
+         
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/users/reportUser":{
+      "post":{
+        "tags": ["Auth"],
+        "summary": "API Endpoint to Report the User",
+        "description" : "Report users",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "User params to login",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/reportUser"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/users/Profile":{
+      "get":{
+        "tags": ["Profile"],
+        "summary": "API Endpoint for Detailed Profile Information",
+        "description" : "Detailed Profile Information",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/users/instaToken/{token}":{
+      "get":{
+        "tags": ["Insta token"],
+        "summary": "API Endpoint to update insta token",
+        "description" : "Update insta token",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/chat/getChatList":{
+      "get":{
+        "tags": ["Chat"],
+        "summary": "API Endpoint for Detailed Profile Information",
+        "description" : "Detailed Profile Information",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/users/list":{
+      "get":{
+        "tags": ["Profile"],
+        "summary": "API Endpoint for listing All users",
+        "description" : "Listing All USERS",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/users/deleteprofile":{
+      "delete":{
+        "tags": ["Profile"],
+        "summary": "API Endpoint to Delete User Profile",
+        "description" : "Deletes User Profile",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/users/uploadImages":{
+      "post":{
+        "tags": ["Profile"],
+        "summary": "API Endpoint to Upload Profile Images",
+        "description" : "Upload Images",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "profilePic",
+            "in": "formData",
+            "type": "file"
+          }
+          
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/users/deleteimage/{id}": {
+      "delete":{
+        "tags": ["Profile"],
+        "summary": "API Endpoint to Delete User Images",
+        "description" : "Deletes User Profile Images",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "id",
+            "description": "search parameters",
+            "in": "path",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns deleted image"},
+          "404":
+            {"description": "Something went wrong"}
+        }
+      }
+    },
+    "/users/updateProfile":{
+      "post":{
+        "tags": ["Question/Answers"],
+        "summary": "API Endpoint to Answer Questions",
+        "description" : "Answer Questions",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "Update Or Answer Questions",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/updateProfile"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/users/answersProfile":{
+      "post":{
+        "tags": ["Question/Answers"],
+        "summary": "API Endpoint to Answer 3 custom Questions",
+        "description" : "Answer 3 custom Questions",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "Update Or Answer Questions",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/answersProfile"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/users/contactShare":{
+      "post":{
+        "tags": ["Question/Answers"],
+        "summary": "API Endpoint to Share contact numbers",
+        "description" : "Share Contact Numbers",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "Share Contact Numbers",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/contactshare"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/users/latlong":{
+      "post":{
+        "tags": ["Question/Answers"],
+        "summary": "API Endpoint to Add or Update Location",
+        "description" : "Add or Update Locations",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "Add or Update Locations",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/latlong"
+            }
+          }
+        ], 
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/users/imageOrder":{
+      "put":{
+        "tags": ["Profile"],
+        "summary": "API Endpoint to Change order for images",
+        "description" : "Change order for images",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "Change order for images",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/imageOrder"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/matches/{pageNumber}":{
+      "get":{
+        "tags": ["Matches"],
+        "summary": "API Endpoint to get matches Cards",
+        "description" : "Get matches",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "pageNumber",
+            "description": "Enter page number",
+            "in": "path",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/matches/react":{
+      "post":{
+        "tags": ["Matches"],
+        "summary": "API Endpoint to react for match",
+        "description" : "React for match",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "React for match",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/reaction"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/matches/list/{pageNumber}":{
+      "get":{
+        "tags": ["Matches"],
+        "summary": "API Endpoint to get matches list",
+        "description" : "Get matches",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "pageNumber",
+            "description": "Enter page number",
+            "in": "path",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/matches/newMatchList/{pageNumber}":{
+      "get":{
+        "tags": ["Matches"],
+        "summary": "API Endpoint to get new matches list",
+        "description" : "Get matches",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "pageNumber",
+            "description": "Enter page number",
+            "in": "path",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/matches/getMatchData/{id}": {
+      "get":{
+        "tags": ["Matches"],
+        "summary": "API Endpoint to get Data of Match",
+        "description" : "Getting Match Data",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "id",
+            "description": "get Match Data",
+            "in": "path",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/matches/getAnswers/{id}": {
+      "get":{
+        "tags": ["Matches"],
+        "summary": "API Endpoint to get answers of matches",
+        "description" : "Gets Answers of Matches",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "id",
+            "description": "get answers",
+            "in": "path",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns answers given by match"},
+          "404":
+            {"description": "Something went wrong"}
+        }
+      }
+    },
+    "/matches/proposeTime": {
+      "post":{
+        "tags": ["Matches"],
+        "summary": "API Endpoint to Propose Time",
+        "description" : "Propose Time",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "React for match",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/proposeTime"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/matches/getproposeTime/{id}": {
+      "get":{
+        "tags": ["Matches"],
+        "summary": "API Endpoint to get Proposed Time",
+        "description" : "Getting Time",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "id",
+            "description": "get Proposed Time",
+            "in": "path",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/matches/addTimeTokens": {
+      "post":{
+        "tags": ["Matches"],
+        "summary": "API Endpoint to Add Time Tokens",
+        "description" : "Add Time Tokens",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "Add Timetokens",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/addTimeTokens"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/matches/addSuperLikes": {
+      "post":{
+        "tags": ["Matches"],
+        "summary": "API Endpoint to Add Super Likes",
+        "description" : "Add Superlikes or crush tokens",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "Add Superlikes",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/addSuperLikes"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/matches/applyTimeTokens": {
+      "post":{
+        "tags": ["Matches"],
+        "summary": "API Endpoint to Apply Time Tokens",
+        "description" : "Apply Time Tokens",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "Apply Time Tokens",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/applyTimeTokens"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns new  expiry time"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/matches/rewind/{id}": {
+      "delete":{
+        "tags": ["Matches"],
+        "summary": "API Endpoint to rewind reactions",
+        "description" : "Rewind reactions",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "id",
+            "description": "rewind reactions",
+            "in": "path",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns rewinded reaction"},
+          "404":
+            {"description": "Something went wrong"}
+        }
+      }
+    },
+    "/matches/unmatch/{id}": {
+      "delete":{
+        "tags": ["Matches"],
+        "summary": "API Endpoint to UNMATCH",
+        "description" : "Unmatch the matches",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "id",
+            "description": "Unmatch User",
+            "in": "path",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns unmatched data"},
+          "404":
+            {"description": "Something went wrong"}
+        }
+      }
+    },
+    "/settings":{
+      "get":{
+        "tags": ["Settings"],
+        "summary": "API Endpoint to get settings",
+        "description" : "Get settings",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      },
+      "put":{
+        "tags": ["Settings"],
+        "summary": "API Endpoint to update settings",
+        "description" : "Update settings",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "Update Or Answer Questions",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/settings"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/settings/getSuperLikes":{
+      "put":{
+        "tags": ["Settings"],
+        "summary": "API Endpoint to Buy superlikes",
+        "description" : "Buy superlikes",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "Buy superlikes",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/getSuperLikes"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/subscription/add":{
+      "post":{
+        "tags": ["Subscription"],
+        "summary": "API Endpoint for Subscription",
+        "description" : "API Endpoint for Subscription",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "API for adding Subscription",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/add"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/subscription/getDetails":{
+      "get":{
+        "tags": ["Subscription"],
+        "summary": "API Endpoint to get Subscription Details",
+        "description" : "Get Subscription Details",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    },
+    "/subscription/updateSubscription": {
+      "put":{
+        "tags": ["Subscription"],
+        "summary": "API Endpoint for Subscription",
+        "description" : "API Endpoint for Subscription",
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": "true"
+          },
+          {
+            "name": "param",
+            "description": "API for updating status of Subscription",
+            "in": "body",
+            "required": "true",
+            "schema" : {
+              "$ref" : "#definitions/updatesub"
+            }
+          }
+        ],
+        "produces" : ["application/json"],
+        "responses":{
+          "200":
+            {"description": "Returns user"},
+          "404":
+            {"description": "Somthing went wrong"}
+        }
+      }
+    }
+  },
+  "definitions":{
+    "login":{
+      "required": [ "email" ],
+      "properties":{
+        "email": {
+          "type" : "string"
+        },
+        "socialType": {
+          "type" : "integer"
+        },
+        "socialId": {
+          "type": "string"
+        },
+        "deviceType": {
+          "type" : "string",
+          "enum" : "ANDROID,IOS"   
+       },
+        "devicetoken": {
+          "type": "string"
+        },  
+        "linkedinId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "linkedin":{
+      "required": [ "email" ],
+      "properties":{
+        "linkedinId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "deviceType": {
+          "type" : "string",
+          "enum" : "ANDROID,IOS"   
+       },
+        "devicetoken": {
+          "type": "string"
+        }
+      }
+    },
+    "resendOtp":{
+      "required": [ "email" ],
+      "properties":{
+        "email": {
+          "type" : "string"
+        }
+      }
+    },
+    "verifyOtp": {
+      "required": [ "email,otp" ],
+      "properties":{
+        "email": {
+          "type" : "string"
+        },
+        "otp": {
+          "type" : "integer"
+        },
+        "deviceType": {
+          "type" : "string",
+          "enum" : "ANDROID,IOS"   
+       },
+        "devicetoken": {
+          "type": "string"
+        },
+        "linkedinId": {
+          "type": "string"
+        } 
+      }
+    },
+    "reportUser": {
+      "properties":{
+        "reportedfor": {
+          "type" : "integer"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "updateProfile":{
+      "properties":{
+        "name": {
+          "type" : "string"
+        },
+        "aboutme":{
+          "type" : "string"
+        },
+        "dob": {
+          "type" : "string",
+          "example" : "2020-01-14"
+        },
+        "gender": {
+          "type" : "string"
+        },
+        "showmeto": {
+          "type" : "string",
+          "enum": ["Male, Female"]
+        },
+        "interested": {
+          "type" : "string",
+          "enum": ["Men, Women, Both"]
+        },
+        "ethnicity": {
+          "type" : "string",
+          "enum": ["Caucasian, Black, Hispanic, Indian, Middle Eastern, Native American, Asian, Mixed Race, Other"]
+        },
+        "Kids": {
+          "type" : "string",
+          "enum": ["Don’t have any, Have and want more, Have and don’t want anymore,Don’t want any"]
+        },
+        "height": {
+          "type" : "string",
+          "example": "5.9"
+        },
+        "ZodiacSign": {
+          "type" : "string"
+        },
+        "education": {
+          "type" : "string",
+          "enum": ["High school, Some college, Associates degree, Bachelors degree, Graduate degree, PhD/Post Doctoral degree"]
+        },
+        "school": {
+          "type" : "string"
+        },
+        "occupation": {
+          "type" : "string"
+        },
+        "Relegion": {
+          "type" : "string",
+          "enum" : ["Agnostic, Atheist, Buddhist,  Christian, Hindu, Jewish ,  Muslim, Spiritual, Other"]
+        },  
+        "Political": {
+          "type" : "string",
+          "enum" : ["Liberal, Conservative, Moderate, Apolitical"]
+        },
+        "Drink": {
+          "type" : "string",
+          "enum" : "Never , Socially , Often"
+        },
+        "Smoke": {
+          "type" : "string",
+          "enum" : "Never , Socially , Often"
+        },
+        "Exercise": {
+          "type" : "string",
+          "enum" : "Sometimes, Often, Almost never"
+        },
+        "lookingFor": {
+          "type" : "string",
+          "enum" : "Relationship,Marriage,Something Casual,Not Sure"
+        },
+        "ambitions": {
+          "type" : "string"
+        },
+        "pets": {
+          "type" : "string",
+          "enum" : "Yes,No"
+        },
+        "City": {
+          "type" : "string"
+        },
+        "Question1": {
+          "type" : "string"
+        },
+        "Answer1": {
+          "type" : "string"
+        },
+        "Question2": {
+          "type" : "string"
+        },
+        "Answer2": {
+          "type" : "string"
+        },
+        "Question3": {
+          "type" : "string"
+        },
+        "Answer3": {
+          "type" : "string"
+        }
+      }
+    },
+    "latlong": {
+      "properties":{
+        "latitude": {
+          "type" : "string"
+        },
+        "longitude": {
+          "type" : "string"
+        }
+      }
+    },
+    "answersProfile":{
+      "required": [ "matchId" ],
+      "properties":{
+        "matchId": {
+          "type" : "integer"
+        },
+        "Answer1": {
+          "type" : "string"
+        },
+        "Answer2": {
+          "type" : "string"
+        },
+        "Answer3": {
+          "type" : "string"
+        }
+      }
+    },
+    "contactshare":{
+      "properties":{
+        "matchId": {
+          "type" : "integer"
+        },
+        "contact": {  
+          "type" : "string"
+        }
+      }
+    },
+    "settings": {
+      "properties":{
+        "visible": {
+          "type" : "string",
+          "example": "True/False"
+        },
+        "maxAgePrefer": {
+          "type" : "integer"
+        },
+        "minAgePrefer": {
+          "type" : "integer"
+        },
+        "distance": {
+          "type" : "integer"
+        },
+        "chatNotify": {
+          "type" : "string",
+          "example": "On/Off" 
+        },
+        "matchNotify": {
+          "type" : "string",
+          "example": "On/Off"
+        },
+        "expiredMatches": {
+          "type" : "string",
+          "example": "On/Off"
+        },
+        "matchUpdates": {
+          "type" : "string",
+          "example": "On/Off"
+        }
+      }
+    },
+    "reaction": {
+      "properties":{
+        "reaction": {
+          "type" : "string",
+          "example": "dislike/like/superlike"
+        },
+        "toId": {
+          "type" : "integer"
+        }
+      }
+    },
+    "proposeTime": {
+      "properties":{
+        "matchId": {
+          "type" : "integer"
+        },
+        "time": {
+          "type" : "string",
+          "example": "YYYY-MM-DD HH:MM:SS"
+        }
+      }
+    },
+    "addTimeTokens": {
+      "properties":{
+        "timeTokens": {
+          "type" : "integer"
+        },
+        "price" : {
+          "type": "number"
+        }
+      }
+    },
+    "addSuperLikes": {
+      "properties":{
+        "superlikeTokens": {
+          "type" : "integer"
+        },
+        "price" : {
+          "type": "number"
+        }
+      }
+    },
+    "applyTimeTokens": {
+      "properties":{
+        "matchId": {
+          "type" : "integer"
+        },
+        "time": {
+          "type" : "integer"
+        },
+        "numberOfTokens": {
+          "type" : "integer"
+        }
+      }
+    },
+    "imageOrder": {
+      "required": [ "images" ],
+      "properties":{
+        "images": {
+          "type" : "array",
+          "example": [
+            { 
+              "orderId":1,
+              "imageUrl": "images/imgurl1"
+            },
+            {
+              "orderId":2,
+              "imageUrl": "images/imgurl2"
+            },
+            {
+              "orderId":3,
+              "imageUrl": "images/imgurl3"
+            }
+          ]
+        }
+      }
+    },
+    "getSuperLikes": {
+      "required": [ "superLikesCount" ],
+      "properties":{
+        "superLikesCount": {
+          "type" : "integer"
+        }
+      }
+    },
+    "add": {
+      "properties":{
+        "subscriptionId": {
+          "type" : "string"
+        },
+        "loginType": {
+          "type" : "string",
+          "example": "ANDROID/IOS" 
+        },
+        "orderId": {
+          "type" : "string"
+        },
+        "purchaseToken": {
+          "type" : "string"
+        },
+        "purchaseTime":{
+          "type" : "string",
+          "example" : "2020-04-17 12:30:55"
+        },
+        "signature":{
+          "type" : "string"
+        },
+        "purchaseState":{
+          "type" : "string"
+        },
+        "autoRenewing":{
+          "type" :  "number"
+        },
+        "price": {
+          "type" : "number"
+        },
+        "subscriptionPeriod": {
+          "type" : "integer"
+        }
+      }
+    },
+    "updatesub": {
+      "properties":{
+        "subscriptionId": {
+          "type" : "string"
+        },
+        "subscriptionStatus": {
+          "type" : "string",
+          "example": "Active/Cancelled" 
+        }
+      }
+    }
+  }
+}

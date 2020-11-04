@@ -1,0 +1,98 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .fa-4x {
+        font-size: 2em;
+    }
+    .tooltip-color a {
+        color: #3c3454;
+    }
+
+    .tooltip-color #delete {
+        color: #f15d5d;
+    }
+
+    .tooltip-color #view {
+        color: orange;
+    }
+
+    .tooltip-color #message {
+        color: #4fc3f7;
+    }
+
+    .tooltip-color #chat {
+        color: #60a960;
+    }
+</style>
+<div class="row">
+    <div class="col-12">
+        <div class="material-card card">
+            <div class="card-body">
+                <h4 class="card-title">Pending List</h4>
+                <div class="table-responsive">
+                    <table id="zero_config" class="table table-striped border">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Signup On</th>
+                                <!-- <th>Last Login At</th> -->
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%  i = 1; %>
+                            <%  list.forEach(function(data){ %>
+                            <% if(data.SelfiesForUser != null && data.profileOfUser != null  && data.isVerified == "No") { %>
+                            <tr>
+                                <td><%= i++  %></td>
+                                <td>
+                                    <% if(data.profileOfUser.name == null) { %> - <% } else {  %>
+                                    <%= data.profileOfUser.name %> <% } %>
+                                </td>
+                                <td><%= data.email %></td><td><% 
+                                    var myTimezone = "America/New_York";
+                                    var myDatetimeFormat= "MM-DD-YY  hh:mm:ss a";
+                                    var myDatetimeString = moment(data.createdAt).tz(myTimezone).format(myDatetimeFormat); %><%= myDatetimeString %></td>
+                                <td>
+                                    <span class="tooltip-color">
+                                        <a href="/admin/verifications/view/<%= data.id %>" id="view"><span
+                                                class="fas fa-eye fa-4x" tool-tip-toggle="tooltip-demo"
+                                                data-original-title="View Details"></span></a>
+                                        <a href="/admin/verifications/change-verify-status/<%= data.id %>"
+                                            id="chat"><span class="fa fa-check fa-4x" onclick="return confirm('Are you sure you want to Verify this.');" tool-tip-toggle="tooltip-demo"
+                                                data-original-title="Verify"></span></a>
+                                        <a href="/admin/verifications/change-deny-status/<%= data.id %>"
+                                            id="delete"><span class="fa fa-ban fa-4x" onclick="return confirm('Are you sure you want to Reject this.');" tool-tip-toggle="tooltip-demo"
+                                                data-original-title="Reject"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <% } %>
+                            <% }) %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Signup On</th> 
+                                <th>Actions</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('[tool-tip-toggle="tooltip-demo"]').tooltip({
+            placement: 'bottom'
+        });
+    });
+</script>

@@ -1,0 +1,162 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .email {
+        font-size: 80%;
+    }
+
+    .fa-4x {
+        font-size: 2em;
+    }
+
+    .tooltip-color a {
+        color: #3c3454;
+    }
+
+    .tooltip-color #delete {
+        color: #f15d5d;
+    }
+
+    .tooltip-color #view {
+        color: orange;
+    }
+
+    .tooltip-color #message {
+        color: #4fc3f7;
+    }
+
+    .tooltip-color #chat {
+        color: #60a960;
+    }
+</style>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<!-- basic table -->
+<div class="row">
+    <div class="col-12">
+        <div class="material-card card">
+            <div class="card-body">
+                <h4 class="card-title">Complaints List</h4>
+
+                <div class="table-responsive">
+                    <table id="zero_config" class="table table-striped border">
+                        <thead>
+                            <tr>
+                                    <th>#</th>
+                                    <th>Reported By</th>
+                                    <th>Reported For</th>
+                                    <th>Reason</th>
+                                    <th>Complaint Time</th>
+                                    <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%  i = 1; %>
+                            <%  list.forEach(function(data){ %>
+                            <% if((data.ReportByUser != null) && (data.ReportForUser != null) ) { %> <tr>
+                                <td><%= i++  %></td>
+                                <td><span>
+                                        <% if(data.ReportByUser.profileOfUser == null) { %>
+                                        -
+                                        <% } else { %>
+                                        <%= data.ReportByUser.profileOfUser.name %>
+                                        <% } %>
+                                    </span> <br />
+
+                                    <span  class="email"> 
+                                        <a href="/admin/users/view/<%= data.ReportByUser.id %>" id="view">
+                                           
+                                            (<%= data.ReportByUser.email %>)</span></a>
+
+
+
+                                    <!-- <span class="email">(<%= data.ReportByUser.email %>)</span></td> -->
+                                <td>
+                                    <span>
+                                        <% console.log('---------userid',data) %>
+                                        <% if(data.ReportForUser.profileOfUser == null) { %>
+                                        -
+                                        <% } else { %>
+                                        <%= data.ReportForUser.profileOfUser.name %>
+                                        <% } %>
+                                    </span> <br />
+                                    <span>
+                                    <a href="/admin/users/view/<%= data.ReportForUser.id %>" id="view">
+                                       
+                                        (<%= data.ReportForUser.email %>)</span></a>
+                                    <!-- <span class="email">(<%= data.ReportForUser.email %>)</span> -->
+                                </td>
+                                <td><%= data.reason %></td>
+                                <td>
+                                    <% 
+                                    var myTimezone = "America/New_York";
+                                    var myDatetimeFormat= "MM-DD-YY  hh:mm:ss a";
+                                    var myDatetimeString = moment(data.createdAt).tz(myTimezone).format(myDatetimeFormat); %><%= myDatetimeString %></td>
+
+                                </td>
+
+                                <td>
+
+                                    <span class="tooltip-color">
+                                        <a href="/admin/users/view-chat-messages-reported-user/<%= data.reportedFor %>/<%= data.reportedBy %>"
+                                            id="chat"><span class="fas fa-comment-dots fa-4x"
+                                                tool-tip-toggle="tooltip-demo"
+                                                data-original-title="View Chat"></span></a>
+                                        <a href="/admin/complaints/change-active-status/<%= data.id %>"
+                                            id="delete"><span class="fa fa-trash fa-4x" tool-tip-toggle="tooltip-demo"
+                                                data-original-title="Delete" onclick="return confirm('Are you sure you want to Delete this.');"></span></a>
+
+                                                
+
+                                                <% if(data.ReportForUser.statusByadmin == 'Activate') { %>
+                                                    <a href="/admin/complaints/deactive-active-status/<%= data.ReportForUser.id %>"><span
+                                                            class="fa fa-ban fa-2x" style="color:red" tool-tip-toggle="tooltip-demo"
+                                                            data-original-title="Ban User"
+                                                            onclick="return confirm('Are you sure you want to Ban this.');"></span></a>
+                                                    <% } else { %>
+                                                    <a href="/admin/complaints/active-deactive-status/<%= data.ReportForUser.id %>"><span
+                                                            class="fa fa-check fa-2x" style="color:green"
+                                                            tool-tip-toggle="tooltip-demo" data-original-title="Activate User"
+                                                            onclick="return confirm('Are you sure you want to Active this.');"></span></a>
+                                                    <% } %>
+            
+
+
+
+                                                
+
+                                    </span>
+
+                                </td>
+                            </tr>
+                            <% } %>
+
+                            <% }) %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>Reported By</th>
+                                <th>Reported For</th>
+                                <th>Reason</th>
+                                <th>Complaint Time</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('[tool-tip-toggle="tooltip-demo"]').tooltip({
+            placement: 'bottom'
+        });
+    });
+</script>

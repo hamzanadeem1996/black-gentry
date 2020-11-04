@@ -1,0 +1,55 @@
+<%- console.log("=============INSIDE THE MATCHES===========>>>>>>>>>>>>>>",list) %>
+
+
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<!-- basic table -->
+<div class="row">
+    <div class="col-12">
+        <div class="material-card card">
+            <div class="card-body">
+                <h4 class="card-title">Scheduled Calls List</h4>
+
+                <div class="table-responsive">
+                    <table id="zero_config" class="table table-striped border">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>FROM ID</th>
+                                <th>TO ID</th>
+                                <th>Proposed Time</th>
+                                <th>Status</th>
+                                <th>Last Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%  i = 1; %>
+                            <%  list.forEach(function(data){ %>
+                            <tr>
+                                <td><%= i++  %></td>
+                                <td><%= data.callForUser.email %></td>
+                                <td><%= data.callToUser.email %></td>
+                                <td><%= data.proposeTime.toUTCString(); %></td>
+                                <td><%= data.Status %></td>
+                                <td><%= data.updatedAt.toUTCString(); %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>FROM ID</th>
+                                <th>TO ID</th>
+                                <th>Proposed Time</th>
+                                <th>Status</th>
+                                <th>Last Updated</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

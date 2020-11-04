@@ -1,0 +1,104 @@
+<%- console.log("=============INSIDE THE MATCHES===========>>>>>>>>>>>>>>",list) %>
+
+
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<!-- basic table -->
+<div class="row">
+    <div class="col-12">
+        <div class="material-card card">
+            <div class="card-body">
+                <h4 class="card-title">Matches List</h4>
+
+                <div class="table-responsive">
+                    <table id="zero_config" class="table table-striped border">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Match Created At</th>
+                                <th>Actions</th>
+                                <!-- <th>Created At</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%  i = 1; %>
+                            <%  list.forEach(function(data){ %>
+                                <% if((data.MatchForUser != null) && (data.MatchToUser != null) ) { %>   
+
+                            <tr>
+                                <td><%= i++  %></td>
+                                <td><span>
+                                        <% if(data.MatchForUser.profileOfUser == null) { %>
+                                        -
+                                        <% } else { %>
+                                        <%= data.MatchForUser.profileOfUser.name %>
+                                        <% } %>
+                                    </span> <br />
+                                    <span class="email"><%= data.MatchForUser.email %></span>
+                                </td>
+                                <td><span>
+                                        <% if(data.MatchToUser.profileOfUser == null) { %>
+                                        -
+                                        <% } else { %>
+                                        <%= data.MatchToUser.profileOfUser.name %>
+                                        <% } %>
+                                    </span> <br />
+                                    <span class="email"><%= data.MatchToUser.email %></span></td>
+                                <td>
+                                   
+                                    <% if(data.createdAt != null) {%>
+                                        <% 
+                                        var myTimezone = "America/New_York";
+                                        var myDatetimeFormat= "MM-DD-YY  hh:mm:ss a";
+                                        var myDatetimeString = moment(data.createdAt).tz(myTimezone).format(myDatetimeFormat); %><%= myDatetimeString %>
+    
+                                    <% } else {%>
+                                    <p>-</p>
+                                    <% } %>
+                                </td>
+                                <td>
+                                        <span class="tooltip-color">
+                                  
+                                            <a href="/admin/users/view-chat-messages-reported-user/<%= data.fromId %>/<%= data.toId %>"
+                                                id="chat"><span class="fas fa-comment-dots fa-2x"
+                                                    tool-tip-toggle="tooltip-demo"
+                                                    data-original-title="View Chat"></span></a>
+
+                                        </span>
+    
+                                    </td>
+                            </tr>
+                            <% } %>
+                            <% }) %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Match Created At</th>
+                                <th>Actions</th>
+
+                                <!-- <th>Created At</th> -->
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('[tool-tip-toggle="tooltip-demo"]').tooltip({
+            placement: 'bottom'
+        });
+    });
+</script>

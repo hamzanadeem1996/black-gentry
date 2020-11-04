@@ -1,0 +1,376 @@
+<%- console.log("Getting Dashboard List------------>>>>>>>>>>>>>>>>>>>>") %>
+
+<% list.ios_count %>
+<% list.android_count %>
+<% list.report_count %>
+<% list.allusers_count %>
+<% list.match_count %>
+<% list.pending_count %>
+<% list.rejected_count %>
+<% list.active_users_count %>
+<% list.male_count %>
+<% list.female_count %>
+<% list.other_count %>
+<% list.time_earnings %>
+<% list.incomplete %>
+<% list.active_user %>
+<% list.deactivate_user %>
+
+
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb bg-light">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-xs-12 align-self-center">
+            <h5 class="font-medium mb-0">Dashboard</h5>
+        </div>
+        <div class="col-lg-9 col-md-8 col-xs-12 align-self-center">
+
+            <nav aria-label="breadcrumb" class="mt-2 float-md-right float-left">
+                <ol class="breadcrumb mb-0 justify-content-end p-0 bg-light">
+                    <li class="breadcrumb-item"><a href="https://app.blackgentryapp.com/admin/dashboard">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="page-content container-fluid">
+    <!-- ============================================================== -->
+    <!-- Card Group  -->
+    <!-- ============================================================== -->
+    <div class="row dashboard-card">
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title ">Total Users</h5>
+                    <div class="d-flex align-items-center ">
+                        <h2 class="mb-0 display-5"><i class="fa fa-user-circle text-success"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.allusers_count %>
+                                </span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title ">Matches</h5>
+                    <div class="d-flex align-items-center">
+                        <h2 class="mb-0 display-5"><i class="fa fa-heart text-danger"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.match_count %></span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Reported Users</h5>
+                    <div class="d-flex align-items-center ">
+                        <h2 class="mb-0 display-5"><i class=" fa fa-user-times
+                                        text-primary"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.report_count %></span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Pending Approvals</h5>
+                    <div class="d-flex align-items-center ">
+                        <h2 class="mb-0 display-5"><i class="fas fa-users
+                                            text-success"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.pending_count %>
+                                </span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Incomplete Users</h5>
+                    <div class="d-flex align-items-center ">
+                        <h2 class="mb-0 display-5"><i class="fa fa-times-circle
+                            text-primary"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.incomplete %>
+                                </span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Rejected Users</h5>
+                    <div class="d-flex align-items-center ">
+                        <h2 class="mb-0 display-5"><i class="fas fa-ban text-danger"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.rejected_count %></span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title ">Active Users</h5>
+                    <div class="d-flex align-items-center ">
+                        <h2 class="mb-0 display-5"><i class="fa fa-user-plus text-primary"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.active_users_count %></span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title ">Deactive Users</h5>
+                    <div class="d-flex align-items-center ">
+                        <h2 class="mb-0 display-5"><i class="fa fa-user-secret text-danger"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.deactivate_user %></span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Male</h5>
+                    <div class="d-flex align-items-center ">
+                        <h2 class="mb-0 display-5"><i class="fa fa-male
+                                            text-success"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.male_count %>
+                                </span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Female</h5>
+                    <div class="d-flex align-items-center ">
+                        <h2 class="mb-0 display-5"><i class="fa fa-female text-danger"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.female_count %></span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Others</h5>
+                    <div class="d-flex align-items-center ">
+                        <h2 class="mb-0 display-5"><i class="fas fa-mars-double text-primary"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.other_count %></span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Logged In Users</h5>
+                    <div class="d-flex align-items-center ">
+                        <h2 class="mb-0 display-5"><i class="fa fa-check-circle 
+                                            text-success"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.login_count %>
+                                </span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Crush Tokens Purchased</h5>
+                    <div class="d-flex align-items-center ">
+                        <h2 class="mb-0 display-5"><i class="mdi  mdi-heart-box-outline text-danger"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.crush_count %></span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Time Tokens Purchased</h5>
+                    <div class="d-flex align-items-center ">
+                        <h2 class="mb-0 display-5"><i class="mdi  mdi-timer-sand
+                           text-primary"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal"><%- list.time_count %></span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="col-md-4 col-lg-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"> Earnings from  Tokens </h5>
+                        <div class="d-flex align-items-center ">
+                            <h2 class="mb-0 display-5"><i class="mdi mdi-currency-usd
+                                                text-success"></i></h2>
+                            <div class="ml-auto">
+                                <h2 class="mb-0 display-6"><span class="font-normal"><%- list.time_earnings %>
+                                    </span></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title ">Earnings from Subscriptions</h5>
+                        <div class="d-flex align-items-center ">
+                            <h2 class="mb-0 display-5"><i class="mdi mdi-currency-usd
+                               text-primary"></i></h2>
+                            <div class="ml-auto">
+                                <h2 class="mb-0 display-6"><span class="font-normal"><%- list.subscription_earnings %></span></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+    </div>
+
+    <div class="card-header">
+        Recent Users                           
+       </div>
+       <div class="table-responsive">
+        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">No.</th>
+                    <th >Name</th>
+                    <th class="text-center">Email</th>
+                    <th class = "text-center">Verified</th>
+                    <th class="text-center">Gender</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%  i = 1; %>                                  
+                <% for(let users of list.active_user) { %>
+                <tr>
+
+                    <td class="text-center text-muted"><%= i %></td>
+                    <td>
+                        <div class="widget-content p-0">
+                            <div class="widget-content-wrapper">
+                                <!-- <div class="widget-content-left mr-3">
+                                    <div class="widget-content-left">
+                                        <img width="40" class="rounded-circle" src="assets/images/avatars/4.jpg" alt="">
+                                    </div>
+                                </div> -->
+                                <div class="widget-content-left flex2">
+                                    <div class="widget-heading"><%= users.profileOfUser.name %></div>              
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-center"><%= users.email %></td>
+                    <td class="text-center">
+                         <% if(users.statusByadmin == 'Deactivate') {  %>
+                            <p style="color: #b30909;">Banned</p>
+                            <%} else if(users.SelfiesForUser == null){ %>
+                                <p style="color:#ff6600;">Incomplete</p>
+                            <% } else if(users.isVerified == 'Yes') { %>
+                            <p style="color: #1c7905;">Verified</p>
+                            <% } else if(users.isRejected == 1) {%>
+                            <p style="color: #b30909;">Rejected</p>
+                            <% }  else if(users.isVerified == 'No') { %>
+                            <p style="color: #0490bb;">Pending</p>
+                            <% } %>
+                        </td>
+                    <td class="text-center"> <% if(users.profileOfUser.gender == 'Male') {  %>
+                        <p class="badge badge-warning">Male</p>
+                        <%} else if(users.profileOfUser.gender  == 'Female') { %>
+                            <p class="badge badge-danger">Female</p>
+                        <% } %>
+                    </td>
+                    <td class="text-center">
+                        <a href = "/admin/users/view/<%= users.id %>"  id="PopoverCustomT-1" class="btn btn-primary btn-sm">Details</a>
+                    </td>
+                </tr>
+                <% i++ %>
+                <% } %>
+                 </tbody>
+        </table>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- Products yearly sales, Weather Cards Section  -->
+    <!-- ============================================================== -->
+   
+    <!-- <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Registered Users</h4>
+                                <ul class="list-inline text-right">
+                                    <li class="list-inline-item">
+                                        <h5><i class="fa fa-circle mr-1 text-inverse"></i>Male</h5>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <h5><i class="fa fa-circle mr-1 text-info"></i>Female</h5>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <h5><i class="fa fa-circle mr-1 text-success"></i>Others</h5>
+                                    </li>
+                                </ul>
+                                <div id="morris-area-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> -->
+               
+            
+
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+

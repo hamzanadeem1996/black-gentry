@@ -1,0 +1,187 @@
+<%- console.log("=============INSIDE THE ALL USERS===========>>>>>>>>>>>>>>") %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .fa-4x {
+        font-size: 2em;
+    }
+
+    .tooltip-color a {
+        color: #3c3454;
+    }
+
+    .tooltip-color #delete {
+        color: #f15d5d;
+    }
+
+    .tooltip-color #view {
+        color: orange;
+    }
+
+    .tooltip-color #message {
+        color: #4fc3f7;
+    }
+
+    .tooltip-color #chat {
+        color: #60a960;
+    }
+</style>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<!-- basic table -->
+<div class="row">
+    <div class="col-12">
+        <div class="material-card card">
+            <div class="card-body">
+                <h4 class="card-title">All Users List</h4>
+
+                <div class="table-responsive">
+                    <table id="zero_config" class="table table-striped border">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Gender</th>
+                                <th>Age</th>
+                                <th>Device Type </th>
+                                <th>Email Verified</th>
+                                <th>Account Status</th>
+                                <th>Signup On</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%  i = 1; %>
+                            <%  list.forEach(function(data){ %>
+                            <% if(data.profileOfUser != null) { %>
+                            <tr>
+                                <td><%= i++  %></td>
+                                <td>
+                                    <% if(data.profileOfUser == null) { %>
+                                    -
+                                    <% } else { %>
+                                    <% if(data.profileOfUser.name == null) { %>
+                                    <p>-</p>
+                                    <% } else {  %>
+                                    <%= data.profileOfUser.name %>
+                                    <% } %>
+                                    <% } %>
+                                </td>
+                               
+                                <td><%= data.email %></td>
+                                <td>
+                                        <% if(data.profileOfUser.gender != null) {  %>
+                                        <%= data.profileOfUser.gender %>
+    
+                                        <% }  else{ }%>
+                                    </td>
+                                    <td>
+                                       
+                                        <%= data.profileOfUser.dataValues.age %>
+                                    </td>
+                                    <td><%if(data.loginForUser == null) { %>
+                                    
+                                    <p>-</p>
+
+                                     <%}else {%>
+
+                                        <%=data.loginForUser.dataValues.deviceType%>
+                                     <%}%>
+                                    
+                                    
+                                    
+                                    </td>
+
+
+
+                                <td> <% if(data.status == 'Active') {  %>
+                                    <p style="color: #60a960;">Yes</p>
+                                    <% } else { %>
+                                    <p style="color: #ec0a0a;">No</p>
+                                    <% } %></td>
+                                <td> <% if(data.statusByadmin == 'Deactivate') {  %>
+                                    <p style="color: #b30909;">Banned</p>
+                                    <%} else if(data.SelfiesForUser == null){ %>
+                                        <p style="color:#ff6600;">Incomplete</p>
+                                    <% } else if(data.isVerified == 'Yes') { %>
+                                    <p style="color: #1c7905;">Verified</p>
+                                    <% } else if(data.isRejected == 1) {%>
+                                    <p style="color: #b30909;">Rejected</p>
+                                    <% }  else if(data.isVerified == 'No') { %>
+                                    <p style="color: #0490bb;">Pending</p>
+                                    <% } %>
+                                </td>
+                                <td><% 
+                                    var myTimezone = "America/New_York";
+                                    var myDatetimeFormat= "MM-DD-YY  hh:mm:ss a";
+                                    var myDatetimeString = moment(data.createdAt).tz(myTimezone).format(myDatetimeFormat); %><%= myDatetimeString %></td>
+
+                                <td>
+                                    <span class="tooltip-color">
+                                        <a href="/admin/users/view/<%= data.id %>" id="view"><span
+                                                class="fas fa-eye fa-2x" tool-tip-toggle="tooltip-demo"
+                                                data-original-title="View Details"></span></a>
+                                        <a href="/admin/users/message/<%= data.id %>" id="message"><span
+                                                class="far fa-bell fa-2x" tool-tip-toggle="tooltip-demo"
+                                                data-original-title="Message"></span></a>
+                                        <a href="/admin/users/view-chat/<%= data.id %>" id="chat"><span
+                                                class="fas fa-comment-dots fa-2x" tool-tip-toggle="tooltip-demo"
+                                                data-original-title="View Chat"></span></a>
+                                        <a href="/admin/users/change-delete-status/<%= data.id %>" id="delete"><span
+                                                class="fa fa-trash fa-2x" tool-tip-toggle="tooltip-demo"
+                                                data-original-title="Delete"
+                                                onclick="return confirm('Are you sure you want to Delete this.');"></span></a>
+
+
+                                        <% if(data.statusByadmin == 'Activate') { %>
+                                        <a href="/admin/users/change-active-status/<%= data.id %>"><span
+                                                class="fa fa-ban fa-2x" style="color:red" tool-tip-toggle="tooltip-demo"
+                                                data-original-title="Ban User"
+                                                onclick="return confirm('Are you sure you want to Ban this.');"></span></a>
+                                        <% } else { %>
+                                        <a href="/admin/users/change-inactive-status/<%= data.id %>"><span
+                                                class="fa fa-check fa-2x" style="color:green"
+                                                tool-tip-toggle="tooltip-demo" data-original-title="Activate User"
+                                                onclick="return confirm('Are you sure you want to Active this.');"></span></a>
+                                        <% } %>
+
+
+                                    </span>
+                                </td>
+                            </tr>
+                            <% } %>
+                            <% }) %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Gender</th>
+                                <th>Age</th>
+                                <th>Device Type </th> 
+                                <th>Email Verified</th>
+                                <th>Account Status</th>
+                                <th>Signup On</th>
+                                <th>Actions</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('[tool-tip-toggle="tooltip-demo"]').tooltip({
+            placement: 'bottom'
+        });
+    });
+  
+</script>

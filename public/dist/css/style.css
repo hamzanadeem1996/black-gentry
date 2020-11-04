@@ -1,0 +1,55 @@
+.jsgrid-cell.jsgrid-control-field.jsgrid-align-center a button, .jsgrid-cell.jsgrid-control-field.jsgrid-align-center span a {
+
+    font-size: 13px !important;
+    
+    }
+    .jsgrid-cell.jsgrid-control-field.jsgrid-align-center {
+    
+    display: flex;
+    flex-flow: column;
+    width: 100% !important;
+    justify-content: space-between;
+    align-items: center;
+    
+    }
+    .jsgrid-cell.jsgrid-control-field.jsgrid-align-center a, .jsgrid-cell.jsgrid-control-field.jsgrid-align-center span {
+    
+    margin: 2px 0;
+    
+    }
+    table.dataTable td span.tooltip-color a span {
+        font-size: .975rem;
+         padding: 0 2px;
+       }
+       table.dataTable td p {
+           margin-bottom: 0;
+       }
+
+       .dashboard-card .card-header, .card-title{
+        text-transform: capitalize !important;
+       }
+       .dashboard-card .card .card-title{
+           font-size: 13px;
+       }
+       .dashboard-card h2 i {
+        font-size: 32px;
+    }
+    .dashboard-card .ml-auto h2 span {
+        font-size: 28px;
+    }
+    .dashboard-card h2 {
+        line-height: 22px !important;
+    }
+    .dashboard-card h5.card-title {
+        margin-bottom: 0;
+        min-height: 35px;
+    }
+    .dashboard-card .card-body {
+        padding: .675rem;
+    }
+    table.dataTable td p {
+        font-weight: normal !important;
+    }
+    table.dataTable td span.email {
+        color: #0882a7;
+    }

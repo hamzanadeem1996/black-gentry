@@ -1,0 +1,300 @@
+<%- console.log("=============INSIDE THE VIEW USER PAGE===========>>>>>>>>>>>>>>") %>
+
+<p style="display:none;"> <%- userProfile = data.dataValues.profileOfUser.dataValues %> </p>
+<p style="display:none;"> <%- ImageProfile = data.dataValues.ImageForUser %> </p>
+<p style="display:none;"> <%- Selfie = data.dataValues.SelfiesForUser %> </p>
+
+
+
+<%- console.log("=============INSIDE THE PROFILE OF USER===========>>>>>>>>>>>>>>",Selfie.dataValues.selfieUrl) %>
+
+
+<div class="page-content container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-body">
+                <h1 align="center"> User Selfie Verification</h1>
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12">
+                        <form>
+                            <div class="form-group" style="text-align: center">
+                                <img src="/<%- Selfie.dataValues.selfieUrl %>" alt="UNABLE TO PREVIEW IMAGE" height="500" width="500">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail111">Email</label>
+                                <input type="text" class="form-control" id="exampleInputEmail111"
+                                    value="<%- data.dataValues.email %>" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail12">Name</label>
+                                <input type="email" class="form-control" id="exampleInputEmail12"
+                                    value="<%- userProfile.name %>" disabled>
+                            </div>
+                            <div class="form-group">
+                                    <label for="exampleInputPassword11">About Me</label>
+                                    <textarea class="form-control" rows="5" disabled><%- userProfile.aboutme %></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Date Of Birth</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.dob %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                        <label for="exampleInputEmail12">Age</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail12"
+                                            value="<%- userProfile.age %>" disabled>
+                                    </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Gender</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.gender %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Show Me To</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.showmeto %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Interested</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.interested %>" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Kids</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Kids %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Height</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.height %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Zodiac Sign</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.ZodiacSign %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Education</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.education %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">School</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.school %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Occupation</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.occupation %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Relegion</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Relegion %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Political</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Political %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Drink</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Drink %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Smoke</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Smoke %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Exercise</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Exercise %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                        <label for="exampleInputEmail12">Looking For</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail12"
+                                            value="<%- userProfile.lookingFor %>" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                            <label for="exampleInputEmail12">Ambitions</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail12"
+                                                value="<%- userProfile.ambitions %>" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="exampleInputEmail12">Pets</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail12"
+                                                    value="<%- userProfile.pets %>" disabled>
+                                            </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">City</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.City %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Question1</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Question1 %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                        <label for="exampleInputEmail12">Answer1</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail12"
+                                            value="<%- userProfile.Answer1 %>" disabled>
+                                    </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Question2</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Question2 %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                        <label for="exampleInputEmail12">Answer2</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail12"
+                                            value="<%- userProfile.Answer2 %>" disabled>
+                                    </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Question3</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Question3 %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                        <label for="exampleInputEmail12">Answer3</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail12"
+                                            value="<%- userProfile.Answer3 %>" disabled>
+                                    </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Longitude</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.longitude %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Latitude</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.latitude %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Distance</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.distance %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Max Age Preference</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.maxAgePrefer %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Minimum Age Preference</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.minAgePrefer %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Visible</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.visible %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Match Notify</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.matchNotify %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Chat  Notifier </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.chatNotify %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Expired Matches</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.expiredMatches %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Match Updates</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.matchUpdates %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Profile Completed</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.completed %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Pending Superlikes</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.superLikesCount %>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail12">Pending TimeTokens</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.timeToken %>" disabled>
+                                </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail12">Profile Created On</label>
+                                <input type="text" class="form-control" id="exampleInputEmail12"
+                                    value="<%- userProfile.createdAt.toUTCString(); %>" disabled>
+
+                                    <a id="denyLink" href="/admin/verifications/change-deny-status/<%= data.id %>" style="display:none">sdfasfdd</a>
+                                    <a id="updateLink" href="/admin/verifications/change-verify-status/<%= data.id %>" style="display:none">sdfasfdd</a>
+                            </div>
+                            <div class="form-group">
+                            
+                                <div
+                                class="btn btn-info btn-md .btn-success"
+                                style="background-color:#268415e0; border-color:#268415e0; "
+                                onclick="testing()">Verify</div>
+
+                                <div
+                                class="btn btn-info btn-md .btn-success"
+                                style="background-color:#a32009e0; border-color:#a32009e0; "
+                                onclick="testing1()">Reject</div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-columns el-element-overlay">
+                <%  i = 1; %>
+                <%  ImageProfile.forEach(function(dataValues){ %>
+                <% img = dataValues.imageUrl.substring(7) %>                         
+                <div class="card">
+                    <div class="el-card-item">
+                        <div class="el-card-avatar el-overlay-1">
+                            <a class="image-popup-vertical-fit" Y> <img src="/images/<%- img %>" alt="user" /> </a>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+
+        </div>
+    </div>
+    <!-- row -->
+
+</div>
+<script>
+
+function testing(){
+    let confirmation =  confirm('Are you sure you want to Active this.');
+    if(confirmation) {
+        document.getElementById('updateLink').click()
+    }
+    return false;
+}
+
+function testing1(){
+    let confirmation =  confirm('Are you sure you want to Reject this.');
+    if(confirmation) {
+        document.getElementById('denyLink').click()
+    }
+    return false;
+}
+</script>

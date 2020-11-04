@@ -1,0 +1,512 @@
+<p style="display:none;"> <%
+    if(data.dataValues.profileOfUser == null) { 
+        userProfile = 'null'
+    } else {
+        userProfile = data.dataValues.profileOfUser.dataValues
+    } %>
+</p>
+<p style="display:none;"> <% ImageProfile = data.dataValues.ImageForUser %> </p>
+<div class="page-content container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-body">
+                <h1 align="center"> User Detail Page </h1>
+               
+                <div class="row">
+                        <% if(ImageProfile != '') { %>
+                                <div class="col-sm-12 col-xs-6">
+                                        <div class="form-group col-sm-4">
+                                                <h2>Images : </h2>
+                                            </div>
+                                    <div class="card-columns el-element-overlay">
+                                        <%  i = 1; %>
+                                        <%  ImageProfile.forEach(function(dataValues){ %>
+                                        <% img = dataValues.imageUrl.substring(7) %>
+                                        <div class="card">
+                                            <div class="el-card-item">
+                                                <div class="el-card-avatar el-overlay-1">
+                                                    <a class="image-popup-vertical-fit" Y> <img src="/images/<%- img %>"
+                                                            alt="user" /> </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }) %>
+                                    
+                                    </div>
+                                </div>
+                        <% } %>            
+                    <div class="col-sm-12 col-xs-12">
+
+                        <div class="form-group col-sm-4"><br /><br />
+                            <h2>Details : </h2>
+                        </div>
+                        <br /><br />
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail111">Email</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail111"
+                                        value="<%- data.dataValues.email %>" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail12">Name</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="email" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.name %>" disabled>
+                                    <% } else { %>
+                                    <input type="email" class="form-control" id="exampleInputEmail12" value="-"
+                                        disabled>
+                                    <% } %>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail12">Date Of Birth</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.dob %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword11">About Me</label>
+                                <% if(userProfile != 'null') {  %>
+                                <textarea class="form-control" rows="5" disabled><%- userProfile.aboutme %></textarea>
+                                <% } else { %>
+                                <textarea class="form-control" rows="5" disabled>-</textarea>
+                                <% } %>
+
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Age</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.age %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Gender</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.gender %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Show Me To</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.showmeto %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Interested</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.interested %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Kids</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Kids %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Height</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.height %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Zodiac Sign</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.ZodiacSign %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Education</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.education %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">School</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.school %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Occupation</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.occupation %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Relegion</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Relegion %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Visible</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.visible %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Political</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Political %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Drink</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Drink %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Smoke</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Smoke %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Exercise</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.Exercise %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Looking For</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.lookingFor %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Ambitions</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.ambitions %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">Pets</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.pets %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail12">City</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.City %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail12">Question1</label>
+                                <% if(userProfile != 'null') {  %>
+                                <input type="text" class="form-control" id="exampleInputEmail12"
+                                    value="<%- userProfile.Question1 %>" disabled>
+                                <% } else { %>
+                                <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                <% } %>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail12">Answer1</label>
+                                <% if(userProfile != 'null') {  %>
+                                <input type="text" class="form-control" id="exampleInputEmail12"
+                                    value="<%- userProfile.Answer1 %>" disabled>
+                                <% } else { %>
+                                <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                <% } %>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail12">Question2</label>
+                                <% if(userProfile != 'null') {  %>
+                                <input type="text" class="form-control" id="exampleInputEmail12"
+                                    value="<%- userProfile.Question2 %>" disabled>
+                                <% } else { %>
+                                <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                <% } %>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail12">Answer2</label>
+                                <% if(userProfile != 'null') {  %>
+                                <input type="text" class="form-control" id="exampleInputEmail12"
+                                    value="<%- userProfile.Answer2 %>" disabled>
+                                <% } else { %>
+                                <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                <% } %>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail12">Question3</label>
+                                <% if(userProfile != 'null') {  %>
+                                <input type="text" class="form-control" id="exampleInputEmail12"
+                                    value="<%- userProfile.Question3 %>" disabled>
+                                <% } else { %>
+                                <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                <% } %>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail12">Answer3</label>
+                                <% if(userProfile != 'null') {  %>
+                                <input type="text" class="form-control" id="exampleInputEmail12"
+                                    value="<%- userProfile.Answer3 %>" disabled>
+                                <% } else { %>
+                                <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                <% } %>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">Longitude</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.longitude %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">Latitude</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.latitude %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">Distance</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.distance %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">Max Age Preference</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.maxAgePrefer %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">Minimum Age Preference</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.minAgePrefer %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">Match Notify</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.matchNotify %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">Chat Notify</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.chatNotify %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">Expired Matches</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.expiredMatches %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">Match Updates</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.matchUpdates %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">Profile Completed</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.completed %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">Pending Superlikes</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.superLikesCount %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">Pending TimeTokens</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.timeToken %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">City</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.city %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">State</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.state %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="exampleInputEmail12">Country</label>
+                                    <% if(userProfile != 'null') {  %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12"
+                                        value="<%- userProfile.country %>" disabled>
+                                    <% } else { %>
+                                    <input type="text" class="form-control" id="exampleInputEmail12" value="-" disabled>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- row -->
+</div>

@@ -1,0 +1,392 @@
+
+
+<style>
+    .dropdown-item.active, .dropdown-item:active {
+        background-color: #3C3454;
+    }
+    </style>
+    <div class="page-content container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-body">
+                    <h1 align="center"> Chat </h1>
+                    <% if(otherChatdetail == '' && chatDetail == '') { %>
+                    <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+                        <div class="app-inner-layout chat-layout">
+                            <div class="app-inner-layout__wrapper">
+                                <div class="app-inner-layout__content card">
+                                    <div class="table-responsive">
+                                        <br>
+                                        <br>
+                                        <center>
+                                            <h2>No message found !!</h2>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <% } else { %>
+                    <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+                        <div class="app-inner-layout chat-layout">
+    
+                            <div class="app-inner-layout__wrapper">
+                                <div class="app-inner-layout__content card">
+                                    <div class="table-responsive">
+                                        <% if(otherChatdetail == '' && chatDetail != '') { %>
+                                        <div class="app-inner-layout__top-pane">
+                                            <div class="pane-right">
+                                                <div class="mobile-app-menu-btn">
+                                                    <button type="button" class="hamburger hamburger--elastic">
+                                                        <span class="hamburger-box">
+                                                            <span class="hamburger-inner"></span>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                                <div class="avatar-icon-wrapper mr-2">
+                                                    <div
+                                                        class="badge badge-bottom btn-shine badge-success badge-dot badge-dot-lg">
+                                                    </div>
+                                                    <div class="avatar-icon avatar-icon-xl rounded">
+                                                      <% if(image == undefined) { %> 
+                                                         <img  src="/images/1585971425537.jpg" alt="" width="82">
+                                                    <% } else { %>  
+                                                            <% if(image.imageUrl == ''){ %> <img
+                                                                src="/images/1585971425537.jpg" alt="" width="82">
+                                                            <% } else { %>
+                                                            <img src="/<%= image.imageUrl %>" alt=""
+                                                                width="82">
+                                                            <% } %>
+                                                    <% } %>    
+                                                    </div>
+                                                </div>
+                                                <h4 class="mb-0 text-nowrap"><%= nameChatUser.name %>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <% chatDetail.forEach(function(detail){ %>
+                                        <% var chatMessage1 = '';var chatMessage2 = '';chatMessage1Time = '';var chatMessage2Time = '';
+                                                                if(detail.from_id == id) { 
+                                                                    chatMessage1 = detail.message;chatMessage1Time = detail.createdAt; 
+                                                                    var d = chatMessage1Time;
+                                                                    var date = d.getDate();
+                                                                    var month = d.getMonth() + 1; 
+                                                                    var year = d.getFullYear();
+                                                                    var h = d.getHours();
+                                                                    var m = d.getMinutes();
+                                                                    var dateStr1 = month + "-" + date + "-" + year + ", " +  h + " : " + m ;
+                                                                } else { 
+                                                                    chatMessage2 = detail.message;chatMessage2Time = detail.createdAt
+                                                                    var d = chatMessage2Time;
+                                                                    var date = d.getDate();
+                                                                    var month = d.getMonth() + 1; 
+                                                                    var year = d.getFullYear();
+                                                                    var h = d.getHours();
+                                                                    var m = d.getMinutes();
+                                                                    var dateStr2 = month + "-" + date + "-" + year + ", " +  h + " : " + m ;
+                                                                 } %>
+                                        <div class="chat-wrapper">
+                                            <% if(chatMessage2) { %>
+    
+                                            <div class="chat-box-wrapper">
+                                                <div>
+                                                    <div class="avatar-icon-wrapper mr-1">
+                                                        <div
+                                                            class="badge badge-bottom btn-shine badge-success badge-dot badge-dot-lg">
+                                                        </div>
+                                                        <div class="avatar-icon avatar-icon-lg rounded">
+                                                        <% if(image == undefined) { %> 
+                                                            <img src="/images/1585971425537.jpg" alt="">
+                                                        <% } else { %>  
+                                                            <% if(image.imageUrl == ''){ %>
+                                                                <img src="/images/1585971425537.jpg" alt="">
+                                                                <% } else { %>
+                                                                <img src="/<%= chatWithUserImage.imageUrl %>" alt="">
+                                                                <% } %>
+                                                            <% } %>      
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="chat-box"><%= chatMessage2 %></div>
+                                                    <small class="opacity-6">
+                                                        <i class="fa fa-calendar-alt mr-1"></i>
+                                                        <% 
+                                                          
+                                                        %>
+                                                        <%=  dateStr2 %>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <% } else { %>
+                                            <div class="float-right">
+                                                <div class="chat-box-wrapper chat-box-wrapper-right">
+                                                    <div>
+                                                        <div class="chat-box"><%= chatMessage1 %></div>
+                                                        <small class="opacity-6">
+                                                            <i class="fa fa-calendar-alt mr-1"></i>
+                                                            <%=  dateStr1 %>
+                                                        </small>
+                                                    </div>
+                                                    <div>
+                                                        <div class="avatar-icon-wrapper ml-1">
+                                                            <div
+                                                                class="badge badge-bottom btn-shine badge-success badge-dot badge-dot-lg">
+                                                            </div>
+                                                            <div class="avatar-icon avatar-icon-lg rounded">
+                                                                <% if(image == undefined) { %>   
+                                                                    <img
+                                                                    src="/images/1585971425537.jpg" alt="">
+                                                                <% } else { %>  
+                                                                    <% if(image.imageUrl == ''){ %> <img
+                                                                        src="/images/1585971425537.jpg" alt="">
+                                                                    <% } else { %>
+                                                                    <img src="/<%= image.imageUrl %>" alt="">
+                                                                    <% } %>
+                                                                <% } %>  
+                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                            <div class="chat-box-wrapper">
+    
+                                            </div>
+                                        </div>
+                                        <% }) %>
+                                        <% } else { %>
+                                        <div class="app-inner-layout__top-pane">
+                                            <div class="pane-right">
+                                                <div class="mobile-app-menu-btn">
+                                                    <button type="button" class="hamburger hamburger--elastic">
+                                                        <span class="hamburger-box">
+                                                            <span class="hamburger-inner"></span>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                                <div class="avatar-icon-wrapper mr-2">
+                                                    <div
+                                                        class="badge badge-bottom btn-shine badge-success badge-dot badge-dot-lg">
+                                                    </div>
+                                                    <div class="avatar-icon avatar-icon-xl rounded">
+                                                        <% if(image == undefined) { %> 
+                                                            <img src="/images/1585971425537.jpg" alt="" width="82">
+                                                        <% } else { %>  
+                                                                    <% if(image.imageUrl == ''){ %> 
+                                                                        <img src="/images/1585971425537.jpg" alt="" width="82">
+                                                                <% } else { %>
+                                                                <img src="/<%= image.imageUrl %>" alt=""
+                                                                    width="82">
+                                                                <% } %>
+                                                        <% } %>      
+                                                    </div>
+                                                </div>
+                                                <h4 class="mb-0 text-nowrap"><%= nameChatUser.name %>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <% otherChatdetail.forEach(function(detail){ %>
+                                        <% var chatMessage1 = '';var chatMessage2 = '';
+                                            if(detail.from_id == id) { 
+                                                chatMessage1 = detail.message;chatMessage1Time = detail.createdAt; 
+                                                var d = chatMessage1Time;
+                                                var date = d.getDate();
+                                                var month = d.getMonth() + 1; 
+                                                var year = d.getFullYear();
+                                                var h = d.getHours();
+                                                var m = d.getMinutes();
+                                                var dateStr1 = date + "-" + month + "-" + year + ", " +  h + " : " + m;
+                                            } else { 
+                                                chatMessage2 = detail.message;chatMessage2Time = detail.createdAt
+                                                var d = chatMessage2Time;
+                                                var date = d.getDate();
+                                                var month = d.getMonth() + 1; 
+                                                var year = d.getFullYear();
+                                                var h = d.getHours();
+                                                var m = d.getMinutes();
+                                                var dateStr2 = date + "-" + month + "-" + year + ", " +  h + " : " + m;
+                                            } %>
+                                        <div class="chat-wrapper">
+                                            <% if(chatMessage1) { %>
+                                            <div class="chat-box-wrapper">
+                                                <div>
+                                                    <div class="avatar-icon-wrapper mr-1">
+                                                        <div
+                                                            class="badge badge-bottom btn-shine badge-success badge-dot badge-dot-lg">
+                                                        </div>
+                                                        <div class="avatar-icon avatar-icon-lg rounded">
+                                                        <% if(image == undefined) { %>      
+                                                            <img src="/images/1585971425537.jpg" alt="">
+                                                        <% } else { %>  
+                                                            <% if(image.imageUrl == ''){ %>
+                                                                <img src="/images/1585971425537.jpg" alt="">
+                                                                <% } else { %>
+                                                                <img src="/<%= image.imageUrl %>" alt="">
+                                                                <% } %>
+                                                            <% } %>    
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="chat-box"><%= chatMessage1 %></div>
+                                                    <small class="opacity-6">
+                                                        <i class="fa fa-calendar-alt mr-1"></i>
+                                                        <%=  dateStr1 %>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <% } else { %>
+                                            <div class="float-right">
+                                                <div class="chat-box-wrapper chat-box-wrapper-right">
+                                                    <div>
+                                                        <div class="chat-box"><%= chatMessage2 %></div>
+                                                        <small class="opacity-6">
+                                                            <i class="fa fa-calendar-alt mr-1"></i>
+                                                            <%= dateStr2 %>
+                                                        </small>
+                                                    </div>
+                                                    <div>
+                                                        <div class="avatar-icon-wrapper ml-1">
+                                                            <div
+                                                                class="badge badge-bottom btn-shine badge-success badge-dot badge-dot-lg">
+                                                            </div>
+                                                            <div class="avatar-icon avatar-icon-lg rounded">
+                                                                <% if(image == undefined) { %>     
+                                                                    <img src="/images/1585971425537.jpg" alt=""> 
+                                                                <% } else { %>  
+                                                                    <% if(image.imageUrl == ''){ %> <img
+                                                                        src="/images/1585971425537.jpg" alt="">
+                                                                    <% } else { %>
+                                                                    <img src="/<%= chatWithUserImage.imageUrl %>" alt="">
+                                                                    <% } %>
+                                                                <% } %>    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                            <div class="chat-box-wrapper">
+    
+                                            </div>
+                                        </div>
+                                        <% }) %>
+                                        <% } %>
+    
+                                    </div>
+                                </div>
+                                <div class="app-inner-layout__sidebar card" id="activeDiv">
+                                    <ul class="nav flex-column button-active">
+                                        <%- %>
+                                        <% if( reports == '') { %> 
+                                        <% data.forEach(function(list){   %>
+                                        <a
+                                            href="/admin/users/view-chat-messages/<%= id %>/<%= list.profileOfUser.userId %>">
+                                            <li class="nav-item users-list">
+                                                <button type="button" tabindex="0" class="dropdown-item"
+                                                    id="<%= id %>_<%= list.profileOfUser.userId %>">
+                                                    <div class="widget-content p-0">
+                                                        <div class="widget-content-wrapper">
+                                                            <div class="widget-content-left mr-3">
+                                                                <div class="avatar-icon-wrapper">
+                                                                    <div
+                                                                        class="badge badge-bottom badge-success badge-dot badge-dot-lg">
+                                                                    </div>
+                                                                    <div class="avatar-icon">
+                                                                       
+                                                                            <% if(list.ImageForUser.imageUrl == ''){ %> <img
+                                                                            src="/images/1585971425537.jpg" alt="">
+                                                                        <% } else { %>
+                                                                        <img src="/<%= list.ImageForUser[0].imageUrl %>"
+                                                                            alt="">
+                                                                        <% } %></div>
+                                                                </div>
+                                                            </div>
+    
+                                                            <div class="widget-content-left">
+                                                                <div class="widget-heading"><%= list.profileOfUser.name %>
+                                                                </div>
+                                                                <div class="widget-subheading">
+                                                                    <%= list.profileOfUser.aboutme %>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                            </li>
+                                        </a>
+                                        <% }) %>
+                                <% } else { %>
+                                    <% data.some(function(list){  %>
+                                    <% if(list.profileOfUser.userId == chatId) { %>   
+                                            <li class="nav-item users-list">
+                                                <button type="button" tabindex="0" class="dropdown-item"
+                                                    id="<%= id %>_<%= list.profileOfUser.userId %>">
+                                                    <div class="widget-content p-0">
+                                                        <div class="widget-content-wrapper">
+                                                            <div class="widget-content-left mr-3">
+                                                                <div class="avatar-icon-wrapper">
+                                                                    <div
+                                                                        class="badge badge-bottom badge-success badge-dot badge-dot-lg">
+                                                                    </div>
+                                                                    <div class="avatar-icon">
+                                                                            <% if(list.ImageForUser.imageUrl == ''){ %> <img
+                                                                            src="/images/1585971425537.jpg" alt="">
+                                                                        <% } else { %>
+                                                                        <img src="/<%= list.ImageForUser[0].imageUrl %>"
+                                                                            alt="">
+                                                                        <% } %></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="widget-content-left">
+                                                                <div class="widget-heading"><%= list.profileOfUser.name %>
+                                                                </div>
+                                                                <div class="widget-subheading">
+                                                                    <%= list.profileOfUser.aboutme %>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                            </li>
+                                        <% } %> 
+                                        <% }  ) %> 
+                                <% } %>    
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <% } %>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+         document.addEventListener("DOMContentLoaded", function(event) { 
+            var finalId = '';
+            var getChatUserId = '<%= getChatUserId %>';
+            var chatId = '<%= chatId %>';
+            var id = '<%= id %>';
+            if(chatId == '') {
+                finalId = getChatUserId
+            } else if(chatId != '') {
+                finalId = chatId
+            }
+            let aa = id+'_'+finalId
+            document.getElementById(aa).className += ' active'
+        });
+        </script>
+    <script>
+        var path = window.location.pathname
+        let test = path.split('view-chat-messages/')
+        let aa = (test[1]).replace(/\//g, '_')
+        document.getElementById(aa).className += ' active'
+    </script>
+    
+    
