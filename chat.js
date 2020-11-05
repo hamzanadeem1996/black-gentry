@@ -14,9 +14,9 @@ export const socketHelper = () => {
   console.log('repeat mode on')
   //pass in your credentials to create an https server
   var httpsServer = https.createServer(serverConfig);
-  //httpsServer.listen(8443);
-  httpsServer.listen(8443, function () {
-    console.log('listening on for socket', 8443);
+  //httpsServer.listen(process.env.SOCKET_PORT);
+  httpsServer.listen(process.env.SOCKET_PORT, function () {
+    console.log('listening on for socket', process.env.SOCKET_PORT);
   });
   var wss = new WebSocketServer({
     server: httpsServer
