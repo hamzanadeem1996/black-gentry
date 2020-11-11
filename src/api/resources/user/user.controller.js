@@ -146,6 +146,50 @@ export default {
         }
     },
 
+    async sendEmailOtp(req, res) {
+        try {
+            const validates = await userValidation.validateSendEmailOtp(req.body)
+            if (validates.error == true) {
+                return res.status(400).json(validates).end()
+            }
+            await userService.sendOtpToEmail(validates).then(response => {
+                return res.status(HttpStatus.OK).send(response)
+            }).catch(error => {
+                if (error.error) {
+                    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error)
+                } else if (error.code) {
+                    return res.status(HttpStatus.BAD_REQUEST).send(error)
+                } else {
+                    return res.status(HttpStatus.NOT_FOUND).send(error)
+                }
+            })
+        } catch (err) {
+            return res.status(500).send(err)
+        }
+    },
+
+    async sendPhoneOtp(req, res) {
+        try {
+            const validates = await userValidation.validatePhoneOtp(req.body)
+            if (validates.error == true) {
+                return res.status(400).json(validates).end()
+            }
+            await userService.sendOtpToPhoneNumber(validates).then(response => {
+                return res.status(HttpStatus.OK).send(response)
+            }).catch(error => {
+                if (error.error) {
+                    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error)
+                } else if (error.code) {
+                    return res.status(HttpStatus.BAD_REQUEST).send(error)
+                } else {
+                    return res.status(HttpStatus.NOT_FOUND).send(error)
+                }
+            })
+        } catch (err) {
+            return res.status(500).send(err)
+        }
+    },
+
     // New 
 
     async appleLogin(req, res) {
@@ -244,6 +288,62 @@ export default {
                 return res.status(400).json(validates).end()
             }
             await userService.verifyOtp(req.body).then(response => {
+                return res.status(HttpStatus.OK).send(response)
+            }).catch(error => {
+                console.log("Inside the verify controllereeeeeeeee 1",error);
+                if (error.error) {
+                    console.log("Inside the verify controllereeeeeeeee 2");
+                    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error)
+                } else if (error.code) {
+                    console.log("Inside the verify controllereeeeeeeee 3");
+                    return res.status(HttpStatus.BAD_REQUEST).send(error)
+                } else {
+                    console.log("Inside the verify controllereeeeeeeee 4",error);
+                    return res.status(HttpStatus.NOT_FOUND).send(error)
+                }
+            })
+
+        } catch (err) {
+            return res.status(500).send(err)
+        }
+    },
+
+    async resendPhoneOtp(req, res) {
+        try {
+            
+            const validates = await userValidation.validatePhoneOtp(req.body)
+            if (validates.error == true) {
+                return res.status(400).json(validates).end()
+            }
+            await userService.resendPhoneOtp(req.body).then(response => {
+                return res.status(HttpStatus.OK).send(response)
+            }).catch(error => {
+                console.log("Inside the verify controllereeeeeeeee 1",error);
+                if (error.error) {
+                    console.log("Inside the verify controllereeeeeeeee 2");
+                    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error)
+                } else if (error.code) {
+                    console.log("Inside the verify controllereeeeeeeee 3");
+                    return res.status(HttpStatus.BAD_REQUEST).send(error)
+                } else {
+                    console.log("Inside the verify controllereeeeeeeee 4",error);
+                    return res.status(HttpStatus.NOT_FOUND).send(error)
+                }
+            })
+
+        } catch (err) {
+            return res.status(500).send(err)
+        }
+    },
+
+    async verifyPhoneOtp(req, res) {
+        try {
+            
+            const validates = await userValidation.validateVerifyOtpPhone(req.body)
+            if (validates.error == true) {
+                return res.status(400).json(validates).end()
+            }
+            await userService.verifyPhoneOtp(req.body).then(response => {
                 return res.status(HttpStatus.OK).send(response)
             }).catch(error => {
                 console.log("Inside the verify controllereeeeeeeee 1",error);

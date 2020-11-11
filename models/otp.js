@@ -23,6 +23,11 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         type: Sequelize.INTEGER
     },
+    isPhoneOtp: {
+      allowNull: true,
+      type: Sequelize.BOOLEAN,
+      defaultValue: 0
+    },
   }, {});
   Otp.associate = function(models) {
     // associations can be defined here

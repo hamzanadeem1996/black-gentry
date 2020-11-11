@@ -1596,6 +1596,570 @@ export default {
     })
   },
 
+  async resendPhoneOtp(body) {
+    return new Promise((resolve, reject) => {
+      var generatedOtp = generateOtp();
+      var res = {
+        success: false
+      };
+
+      if (generatedOtp.success == true) {
+        Users.findOne({
+          where: {
+            phone: body.phone
+          }
+        }).then(async user => { 
+          if (user) {
+            Otp.findOne({
+              where: {
+                userId: user.id,
+                isPhoneOtp: 1
+              }
+            }).then(async userOtp => {
+              if (userOtp) {
+                Otp.update({
+                  otp: generatedOtp.data,
+                },{
+                  where: {
+                    userId: user.id
+                  }
+                }).then(async response => {
+                  res.success = true
+                  res.message = 'OTP sent succesfully!.'
+                  res.register = true
+                  let sendOtp = await this.sendTwilioMessage(body.phone, generatedOtp.data);
+                  resolve(res)
+                })
+              }
+            })
+          } else {
+            res.message = "User does not exists"
+            reject(res)
+          }
+        });
+      }
+    });
+  },
+
+  async sendOtpToEmail(body) {
+    return new Promise((resolve, reject) => {
+      var res = {
+        success: false
+      };
+
+      Users.findOne({
+        where: {
+          email: body.email
+        }
+      }).then(async user => { 
+        if (user) {
+
+          Users.findOne({
+            where: {
+              phone: body.phone
+            }
+          }).then(async newUser => {
+            var userId = newUser.id;
+            console.log('User with email found')
+            
+            Answer.destroy({
+              where: {
+                [Op.or]: [{ userId: userId }, { matchId: userId }]
+              }
+            }).catch(err => {
+              console.log("unable to delete ANSWERS !")
+            })
+
+            Matches.destroy({
+              where: {
+                [Op.or]: [{ fromId: userId }, { toId: userId }]
+              }
+            }).catch(err => {
+              console.log("UNABLE TO DELETE MATCHES !")
+            })
+
+            Chat.destroy({
+              where: {
+                [Op.or]: [{ from_id: userId }, { to_id: userId }]
+              }
+            }).catch(err => {
+              console.log("UNABLE TO DELETE CHATS")
+            })
+
+            tokenRecords.destroy({
+              where: {
+                userId: userId
+              }
+            }).catch(err => {
+              console.log("UNABLE TO DELETE TOKEN RECORDS")
+            })
+
+            usersPurchases.destroy({
+              where: {
+                userId: userId
+              }
+            }).catch(err => {
+              console.log("UNABLE TO DELETE USER PURCHASES")
+            })
+
+            Swipecounter.destroy({
+              where: {
+                userId: userId
+              }
+            }).catch(err => {
+              console.log("UNABLE TO DELETE SWIPES")
+            })
+
+            CallRequests.destroy({
+              where: {
+                [Op.or]: [{ fromId: userId }, { toId: userId }]
+              }
+            }).catch(err => {
+              console.log("UNABLE TO DELETE CALLREQUESTS")
+            })
+
+            Reactions.destroy({
+              where: {
+                [Op.or]: [{ fromId: userId }, { toId: userId }]
+              }
+            }).catch(err => {
+              console.log("UNABLE TO DELETE REACTIONS")
+            })
+
+            Login.destroy(
+              {
+                where:
+                {
+                  userId: userId
+                }
+              }).catch(err => {
+                console.log("UNABLE TO DELETE LOGINS")
+              })
+
+            Peoples.destroy({
+              where:
+              {
+                userId: userId
+              }
+            }).catch(err => {
+              console.log("UNABLE TO DELETE PEOPLES")
+            })
+
+            Image.destroy({
+              where:
+              {
+                userId: userId
+              }
+            }).catch(err => {
+              console.log("UNABLE TO DELETE IMAGES")
+            })
+
+            Otp.destroy({
+              where:
+              {
+                userId: userId
+              }
+            }).catch(err => {
+              console.log("UNABLE TO DELETE OTP DATA")
+            })
+
+
+            Reports.destroy({
+              where: {
+                [Op.or]: [{ reportedBy: userId }, { reportedFor: userId }]
+              }
+            }).catch(err => {
+              console.log("UNABLE TO DELETE REPORTS")
+            })
+
+
+            Selfies.destroy(
+              {
+                where:
+                {
+                  userId: userId
+                }
+              }).catch(err => {
+                console.log("UNABLE TO DELETE SELFIES")
+              })
+
+            Subscription.destroy(
+              {
+                where:
+                {
+                  userId: userId
+                }
+              }).catch(err => {
+                console.log("UNABLE TO DELETE ")
+              })
+
+
+            Users.destroy({
+              where:
+              {
+                id: userId
+              }
+            }).then(lastuser => {
+              console.log('USER PROFILE DELETED SUCCESFULLY')
+              Users.update({
+                phone: body.phone
+              }, {
+                where: {
+                  email: user.email
+                }
+              }).then(response => {
+                var chk = generateOtp()
+                if (chk.success = true) {
+                  emailService.sendMail("BlackGentry OTP <support@blackgentryapp.com>", chk.data, 'otp.ejs', body.email, "BlackGentry Authentication Code")
+
+                  Otp.findOne({
+                    where: {
+                      userId: user.id
+                    }
+                  }).then(otpfound => {
+                    if (otpfound) {
+                      Otp.update({
+                        otp: chk.data
+                      },
+                      {
+                        where:
+                        {
+                          userId: user.id,
+                          isPhoneOtp: 0
+                        }
+                      }).then(result => {
+                        let res = {
+                          message: 'OTP send to email successfully'
+                        }
+                        res.success = true
+                        res.login = true
+                        resolve(res)
+                      }).catch(err => console.log(err))
+                    }
+                    else {
+                      Otp.create({
+                        userId: user.id,
+                        otp: chk.data,
+                        counter: 1,
+                        isPhoneOtp: 0
+                      }).then(result => {
+                        let res = {
+                          message: 'OTP send to email successfully'
+                        }
+                        res.success = true
+                        res.login = true
+                        resolve(res)
+                      }).catch(err => console.log(err))
+                    }
+
+                  }).catch(err => {
+                    res.message = "Internal Server Error"
+                    reject(res)
+                  })
+
+                } else {
+                  res.message = "Internal Server Error"
+                  reject(res)
+                }
+                res.success = true;
+                res.message = 'OTP send to email successfully';
+                resolve(res);
+              })
+            }).catch(err => {
+              console.log("Unable to delete Users data", err)
+              res.success = false;
+              res.message = 'Internal Server Error';
+              reject(res);
+            })
+          });
+        } else {
+          console.log('This is new user')
+          var chk = generateOtp()
+          if (chk.success = true) {
+            emailService.sendMail("BlackGentry OTP <support@blackgentryapp.com>", chk.data, 'otp.ejs', body.email, "BlackGentry Authentication Code")
+            Users.findOne({
+              where: {
+                phone: body.phone
+              }
+            }).then(async newUser => {
+              if (newUser) {
+                Users.update({
+                  email: body.email
+                }, {
+                  where: {
+                    phone: body.phone
+                  }
+                });
+                Otp.create({
+                  userId: newUser.id,
+                  otp: chk.data,
+                  counter: 1,
+                  isPhoneOtp: 0
+                }).then(result => {
+                  let res = {
+                    message: 'OTP send to email successfully'
+                  }
+                  res.success = true
+                  res.login = true
+                  resolve(res)
+                }).catch(err => console.log(err))
+              } else {
+                res.message = 'User does not exists';
+                reject(res)
+              }
+            });
+          } else {
+            res.message = "Internal Server Error"
+            reject(res)
+          }
+          
+        }
+      });
+    });
+  },
+
+  async sendOtpToPhoneNumber(body) {
+    return new Promise((resolve, reject) => {
+      var generatedOtp = generateOtp();
+      var res = {
+        success: false
+      };
+      if (generatedOtp.success == true) {
+        body.otpOfUser = {
+          otp: generatedOtp.data,
+          counter: 1,
+          isPhoneOtp: true
+        };
+        body.profileOfUser = {
+        };
+        
+        Users.create(body, {
+          include: [
+            {
+              model: Otp,
+              as: 'otpOfUser'
+            },
+            {
+              model: Peoples,
+              as: 'profileOfUser'
+            },
+            {
+              model: Subscription,
+              as: 'subscriptionForUser'
+            }
+          ]
+        }).then(async (user) => {
+          res.success = true
+          res.message = 'OTP sent succesfully!.'
+          res.register = true
+          let sendOtp = await this.sendTwilioMessage(body.phone, generatedOtp.data);
+          resolve(res)
+        }).catch(err => {
+          console.log("ERR in OTP :", err);
+          res.message = 'Something went wrong, please try again later.'
+          res.success = false
+          reject(res);
+        })
+      }
+      else {
+        res.message = "Unable to Create Passcode"
+        res.success = false
+        reject(res)
+      }
+    })
+    
+  },
+
+  async sendTwilioMessage(phone, val) {
+    return new Promise((resolve, reject) => {
+      const accountSid = process.env.TWILIO_ACCOUNT_ID;
+      const authToken = process.env.TWILIO_AUTH_TOKEN;
+      const twilio = require('twilio')(accountSid, authToken);
+
+      twilio.messages.create({
+        body: `This is you Black Gentry verification Code: ${val}.`,
+        from: '+19163474283',
+        to: phone
+      }).then(message => {
+          console.log(message.sid);
+          resolve({status: 200, message: 'OTP send successfully'});
+      }).catch(err => {
+          console.log(err);
+          reject({status: 500, message: 'Internal Server Error'});
+      });
+    });
+  },
+
+  async verifyPhoneOtp(body) {
+    return new Promise(async (resolve, reject) => {
+      var res = {
+        success: false
+      }
+
+      try {
+        Users.findOne({
+          where: {
+            phone: body.phone
+          },
+          include: [{
+            model: Otp,
+            as: 'otpOfUser'
+          }, {
+            model: Peoples,
+            as: 'profileOfUser'
+          },
+          {
+            model: Selfies,
+            as: 'SelfiesForUser'
+          },
+          {
+            model: Subscription,
+            as: 'subscriptionForUser'
+          }
+          ]
+        }).then(async user => { 
+          if (user) {
+            Otp.findOne({
+              where: {
+                userId: user.id,
+                isPhoneOtp: 1
+              }
+            }).then(async userOtp => {
+              if (body.otp == userOtp.otp) {
+                console.log('OTP success')
+                user.update({
+                  status: 'Active'
+                });
+
+                if (user.email) {
+                  console.log('User email found')
+                  var token = jwt.issue({ id: user.id }, '1d');
+                  Login.findOne({
+                    where: {
+                      userId: user.id
+                    }
+                  }).then(loginchk => {
+
+                    Users.findOne({
+                      where: {
+                        phone: body.phone
+                      },
+                      include: {
+                        model: Login,
+                        as: 'loginForUser'
+                      }
+                    }).then(checklogin => {
+                      if (body.linkedinId) {
+                        Login.update({
+                          userId: user.id,
+                          auth_token: token,
+                          deviceId: "DeviceID",
+                          socialType: 4,
+                          deviceType: body.deviceType,
+                          devicetoken: body.devicetoken,
+                        }, {
+                          where: {
+                            userId: checklogin.id
+                          }
+                        }).then(async loginemail => {
+                          var checkImage = await getImages(user.id)
+                          if(user.instaToken != null) {
+                            await axios.get('https://graph.instagram.com/me/media?fields=id,media_type,media_url&access_token='+user.instaToken)
+                            .then(function (responses) {
+                              if(responses.data)
+                              res.insta = responses.data.data
+                            })
+                            .catch(function (error) {
+                              res.error = error
+                              reject(res)
+                            })
+                          }
+                          res.success = true
+                          res.token = token,
+                          res.user = user,
+                          res.images = checkImage,
+                          res.login = true,
+                          res.message = 'Registered successfully with Linkedin'
+                          resolve(res)
+                          
+                        }).catch(err => {
+                          res.message = "Internal Server Error"
+                          reject(res)
+                        })
+                      }
+                      else {
+                        if (loginchk) {
+                          Login.destroy(
+                            {
+                              where: {
+                                "userId": user.id
+                              }
+                            })
+                        }
+                        Login.create({
+                          userId: user.id,
+                          auth_token: token,
+                          deviceId: "DeviceID",
+                          deviceType: body.deviceType,
+                          devicetoken: body.devicetoken,
+                        }).then(async loginemail => {
+                          var checkImage = await getImages(user.id)
+                          if(user.instaToken != null) {
+                            axios.get('https://graph.instagram.com/me/media?fields=id,media_type,media_url&access_token='+user.instaToken)
+                            .then(function (responses) {
+                              if(responses.data)
+                              res.insta = responses.data
+                            })
+                            .catch(function (error) {
+                              // handle error
+                              res.error =error
+                              reject(res)
+                            })
+                          }
+                          res.success = true
+                          res.token = token,
+                          res.user = user,
+                          res.images = checkImage,
+                          res.login = true,
+                          res.message = 'Registered successfully with Email'
+                          resolve(res)
+                          console.log("Login record inserted");
+                        }).catch(err => {
+                          res.message = "Unable to Login 1"
+                          reject(res)
+                        })
+                      }
+                    })
+                  }).catch(err => {
+                    console.log(err)
+                    res.message = "Internal Server Error"
+                    reject(res)
+                  })
+                } else {
+                  res.success = true
+                  res.token = null,
+                  res.user = null,
+                  res.images = null,
+                  res.login = false,
+                  res.message = 'OTP verified successfully'
+                  resolve(res)
+                }
+              } else {
+                res.message = "OTP does not match"
+                reject(res)
+              }
+            })
+          } else {
+            res.message = "User does not exists"
+            reject(res)
+          }
+        });
+      } catch (err) {
+        res.message = "Internal Server Error"
+        reject(res)
+      }
+    });
+  },
 
   async appleLogin(body) {
     return new Promise(async (resolve, reject) => {

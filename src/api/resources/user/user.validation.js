@@ -21,6 +21,53 @@ export default {
         }
     },
 
+    validatePhoneOtp(body) {
+        const schema = Joi.object().keys({
+            phone: Joi.string().required().label('Phone')
+        });
+
+        const { value, error } = Joi.validate(body, schema, { abortEarly: false })
+        if (error && error.details) {
+            let data = { error: true, message: error.details[0].message, details: error.details }
+            return data
+        } else {
+            return value
+        }
+    },
+
+    validateSendEmailOtp(body) {
+        const schema = Joi.object().keys({
+            phone: Joi.string().required().label('Phone'),
+            email: Joi.string().required().label('Email')
+        });
+
+        const { value, error } = Joi.validate(body, schema, { abortEarly: false })
+        if (error && error.details) {
+            let data = { error: true, message: error.details[0].message, details: error.details }
+            return data
+        } else {
+            return value
+        }
+    },
+
+    validateVerifyOtpPhone(body) {
+        const schema = Joi.object().keys({
+            phone: Joi.string().required().label('Phone'),
+            otp: Joi.number().required().label('OTP'),
+            deviceType: Joi.string().label('DEVICE TYPE'),
+            devicetoken: Joi.string().label('DEVICE TOKEN'),
+            linkedinId: Joi.string().label('linkedinId')
+        });
+
+        const { value, error } = Joi.validate(body, schema, { abortEarly: false })
+        if (error && error.details) {
+            let data = { error: true, message: error.details[0].message, details: error.details }
+            return data
+        } else {
+            return value
+        }
+    },
+
     validateAppleLogin(body) {
         const schema = Joi.object().keys({
             email: Joi.string().label('Email').allow(null,""),
