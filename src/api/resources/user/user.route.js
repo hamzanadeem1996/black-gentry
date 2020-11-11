@@ -58,3 +58,5 @@ userRouter.get('/instaToken/:token',  authorization.verifyauthentication,userCon
 
 userRouter.get('/compressImage',  authorization.verifyauthentication,userController.compressOld)
 
+userRouter.post('/update-address', userController.updateAddress);
+

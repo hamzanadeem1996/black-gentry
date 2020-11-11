@@ -86,7 +86,16 @@ module.exports = (sequelize, Sequelize) => {
       comment: 'Yes or No'
     },
     City: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    state: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    country: {
+      type: Sequelize.STRING,
+      allowNull: true,
     },
     Question1: {
       type: Sequelize.TEXT

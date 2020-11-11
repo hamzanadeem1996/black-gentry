@@ -1918,6 +1918,52 @@ export default {
     });
   },
 
+  async updateUserAddress(body) {
+    return new Promise((resolve, reject) => { 
+      var res = {
+        success: false
+      };
+      Users.findOne({
+        where: {
+          id: body.id
+        }
+      }).then(async user => {
+        if (user) {
+          Peoples.findOne({
+            where: {
+              userId: user.id
+            }
+          }).then(async people => {
+            if (people) {
+              people.update({
+                country: body.country,
+                City: body.city ? body.city : null,
+                state: body.state ? body.state : null
+              }).then(async updated => {
+                res.message = 'Address updated successfully'
+                res.success = true
+                resolve(res);
+              })
+            } else {
+              res.message = 'User does not exists'
+              res.success = false
+              reject(res);
+            }
+          })
+        } else {
+          res.message = 'User does not exists'
+          res.success = false
+          reject(res);
+        }
+      }).catch(err => {
+        console.log("ERR in update address :", err);
+        res.message = 'Something went wrong, please try again later.'
+        res.success = false
+        reject(res);
+      })
+    });
+  },
+
   async sendOtpToPhoneNumber(body) {
     return new Promise((resolve, reject) => {
       var generatedOtp = generateOtp();
@@ -1925,40 +1971,95 @@ export default {
         success: false
       };
       if (generatedOtp.success == true) {
-        body.otpOfUser = {
-          otp: generatedOtp.data,
-          counter: 1,
-          isPhoneOtp: true
-        };
-        body.profileOfUser = {
-        };
-        
-        Users.create(body, {
-          include: [
-            {
-              model: Otp,
-              as: 'otpOfUser'
-            },
-            {
-              model: Peoples,
-              as: 'profileOfUser'
-            },
-            {
-              model: Subscription,
-              as: 'subscriptionForUser'
-            }
-          ]
-        }).then(async (user) => {
-          res.success = true
-          res.message = 'OTP sent succesfully!.'
-          res.register = true
-          let sendOtp = await this.sendTwilioMessage(body.phone, generatedOtp.data);
-          resolve(res)
-        }).catch(err => {
-          console.log("ERR in OTP :", err);
-          res.message = 'Something went wrong, please try again later.'
-          res.success = false
-          reject(res);
+
+        Users.findOne({
+          where: {
+            phone: body.phone
+          }
+        }).then(async userFound => {
+          if (userFound) {
+            Otp.findOne({
+              where: {
+                userId: userFound.id,
+                isPhoneOtp: 1
+              }
+            }).then(async otpFound => {
+              if (otpFound) {
+                Otp.update({
+                  otp: generatedOtp.data
+                }, {
+                  where: {
+                    userId: userFound.id
+                  }
+                }).then( async otpUpdated => {
+                  let sendOtp = await this.sendTwilioMessage(body.phone, generatedOtp.data);
+                  res.success = true
+                  res.message = 'OTP sent succesfully!.'
+                  res.register = true
+                  resolve(res)
+                }).catch(err => {
+                  console.log("ERR in OTP :", err);
+                  res.message = 'Something went wrong, please try again later.'
+                  res.success = false
+                  reject(res);
+                })
+              } else {
+                Otp.create({
+                  userId: userFound.id,
+                  otp: generatedOtp.data,
+                  isPhoneOtp: 1,
+                  counter: 1
+                }).then( async otpCreated => {
+                  let sendOtp = await this.sendTwilioMessage(body.phone, generatedOtp.data);
+                  res.success = true
+                  res.message = 'OTP sent succesfully!.'
+                  res.register = true
+                  resolve(res)
+                }).catch(err => {
+                  console.log("ERR in OTP :", err);
+                  res.message = 'Something went wrong, please try again later.'
+                  res.success = false
+                  reject(res);
+                })
+              }
+            })
+          } else {
+            body.otpOfUser = {
+              otp: generatedOtp.data,
+              counter: 1,
+              isPhoneOtp: true
+            };
+            body.profileOfUser = {
+            };
+            
+            Users.create(body, {
+              include: [
+                {
+                  model: Otp,
+                  as: 'otpOfUser'
+                },
+                {
+                  model: Peoples,
+                  as: 'profileOfUser'
+                },
+                {
+                  model: Subscription,
+                  as: 'subscriptionForUser'
+                }
+              ]
+            }).then(async (user) => {
+              res.success = true
+              res.message = 'OTP sent succesfully!.'
+              res.register = true
+              let sendOtp = await this.sendTwilioMessage(body.phone, generatedOtp.data);
+              resolve(res)
+            }).catch(err => {
+              console.log("ERR in OTP :", err);
+              res.message = 'Something went wrong, please try again later.'
+              res.success = false
+              reject(res);
+            })
+          }
         })
       }
       else {
@@ -2019,12 +2120,26 @@ export default {
           ]
         }).then(async user => { 
           if (user) {
+            console.log('======================================')
+            console.log('======================================')
+            console.log('======================================')
+            console.log('User ID :', user.id)
+            console.log('======================================')
+            console.log('======================================')
+            console.log('======================================')
             Otp.findOne({
               where: {
                 userId: user.id,
                 isPhoneOtp: 1
               }
             }).then(async userOtp => {
+              console.log('======================================')
+              console.log('======================================')
+              console.log('======================================')
+              console.log('User OTP :', userOtp)
+              console.log('======================================')
+              console.log('======================================')
+              console.log('======================================')
               if (body.otp == userOtp.otp) {
                 console.log('OTP success')
                 user.update({
@@ -2123,8 +2238,9 @@ export default {
                           res.login = true,
                           res.message = 'Registered successfully with Email'
                           resolve(res)
-                          console.log("Login record inserted");
+                          
                         }).catch(err => {
+                          console.log("Error :", err)
                           res.message = "Unable to Login 1"
                           reject(res)
                         })

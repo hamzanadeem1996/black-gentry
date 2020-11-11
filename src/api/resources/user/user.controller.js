@@ -336,6 +336,33 @@ export default {
         }
     },
 
+    async updateAddress(req, res) {
+        try {
+            const validates = await userValidation.validateUpdateAddress(req.body)
+            if (validates.error == true) {
+                return res.status(400).json(validates).end()
+            }
+            await userService.updateUserAddress(req.body).then(response => {
+                return res.status(HttpStatus.OK).send(response)
+            }).catch(error => {
+                console.log("Inside the verify controllereeeeeeeee 1",error);
+                if (error.error) {
+                    console.log("Inside the verify controllereeeeeeeee 2");
+                    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error)
+                } else if (error.code) {
+                    console.log("Inside the verify controllereeeeeeeee 3");
+                    return res.status(HttpStatus.BAD_REQUEST).send(error)
+                } else {
+                    console.log("Inside the verify controllereeeeeeeee 4",error);
+                    return res.status(HttpStatus.NOT_FOUND).send(error)
+                }
+            })
+
+        } catch (err) {
+            return res.status(500).send(err)
+        }
+    },
+
     async verifyPhoneOtp(req, res) {
         try {
             

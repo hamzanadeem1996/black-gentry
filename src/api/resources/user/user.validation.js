@@ -54,9 +54,26 @@ export default {
         const schema = Joi.object().keys({
             phone: Joi.string().required().label('Phone'),
             otp: Joi.number().required().label('OTP'),
-            deviceType: Joi.string().label('DEVICE TYPE'),
-            devicetoken: Joi.string().label('DEVICE TOKEN'),
+            deviceType: Joi.string().required().label('DEVICE TYPE'),
+            devicetoken: Joi.string().required().label('DEVICE TOKEN'),
             linkedinId: Joi.string().label('linkedinId')
+        });
+
+        const { value, error } = Joi.validate(body, schema, { abortEarly: false })
+        if (error && error.details) {
+            let data = { error: true, message: error.details[0].message, details: error.details }
+            return data
+        } else {
+            return value
+        }
+    },
+
+    validateUpdateAddress(body) {
+        const schema = Joi.object().keys({
+            id: Joi.number().required().label('User ID'),
+            country: Joi.string().required().label('Country'),
+            city: Joi.string().label('City'),
+            state: Joi.string().label('State')
         });
 
         const { value, error } = Joi.validate(body, schema, { abortEarly: false })
