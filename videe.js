@@ -9,9 +9,9 @@ export const videe = () => {
 
   const WebSocket = require('ws');
 
-  const webSocketServer = new WebSocket.Server({ port: process.env.SOCKET_PORT });
+  const webSocketServer = new WebSocket.Server({ port: 8000 });
 
-  console.log(`Websocket listening on ${process.env.SOCKET_PORT}`)
+  console.log(`Websocket listening on 8000`)
 
   webSocketServer.on('connection', (webSocket) => {
 
