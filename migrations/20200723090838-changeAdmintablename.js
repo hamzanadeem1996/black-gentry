@@ -14,7 +14,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Admins');
+    return queryInterface.renameTable('Admins', 'Admin')
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

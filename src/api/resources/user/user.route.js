@@ -18,6 +18,10 @@ userRouter.post('/resendOtp', userController.resendOtp)
 userRouter.get('/roles', userController.roles)
 userRouter.post('/linkedin',userController.linkedin)
 
+userRouter.post('/phone/send-otp', userController.sendPhoneOtp);
+userRouter.post('/phone/verify-otp', userController.verifyPhoneOtp);
+userRouter.post('/phone/resend-otp', userController.resendPhoneOtp);
+userRouter.post('/email/send-otp', userController.sendEmailOtp);
 
 userRouter.post('/command', function(req, res) {
 
@@ -53,4 +57,6 @@ userRouter.get('/logout',  authorization.verifyauthentication,userController.log
 userRouter.get('/instaToken/:token',  authorization.verifyauthentication,userController.instaToken)
 
 userRouter.get('/compressImage',  authorization.verifyauthentication,userController.compressOld)
+
+userRouter.post('/update-address', userController.updateAddress);
 
