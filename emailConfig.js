@@ -5,14 +5,12 @@ export class emailConfig {
  
     async config(){ 
         var config = nodemailer.createTransport({
-            service: 'gmail',
-            host: `${process.env.EMAILHOST}`,
-            port: `${process.env.EMAILPORT}`,
-            tls: true,
-            secure: true, // true for 465, false for other ports
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
             auth: {
-            user: `${process.env.EMAILUSER}`, // generated ethereal user
-            pass: `${process.env.EMAILPASS}` // generated ethereal password
+                user: 'e.saloon.tech@gmail.com',
+                pass: '$upportTech123'
             }
         });
         return config;
