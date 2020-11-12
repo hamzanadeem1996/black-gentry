@@ -9,8 +9,8 @@ export class emailConfig {
             port: 465,
             secure: true,
             auth: {
-                user: 'e.saloon.tech@gmail.com',
-                pass: '$upportTech123'
+                user: 'contact@blackgentryapp.com',
+                pass: 'GentryBlack@123!!'
             }
         });
         return config;
