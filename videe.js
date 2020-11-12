@@ -9,7 +9,7 @@ export const videe = () => {
 
   const WebSocket = require('ws');
 
-  const webSocketServer = new WebSocket.Server({ port: 8000 });
+  const webSocketServer = new WebSocket.Server({ port: 8001 });
 
   console.log(`Websocket listening on 8000`)
 
