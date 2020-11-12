@@ -9,7 +9,7 @@ module.exports = {
       }),
       queryInterface.addColumn('Subscriptions','orderId', {
         type: Sequelize.STRING,
-        after: 'loginType'
+        // after: 'loginType'
       }),
       queryInterface.addColumn('Subscriptions','purchaseToken', {
         type: Sequelize.STRING,
