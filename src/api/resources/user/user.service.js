@@ -1833,6 +1833,7 @@ export default {
                         }
                         res.success = true
                         res.login = true
+                        res.otp = chk.data;
                         resolve(res)
                       }).catch(err => console.log(err))
                     }
@@ -1848,6 +1849,7 @@ export default {
                         }
                         res.success = true
                         res.login = true
+                        res.otp = chk.data;
                         resolve(res)
                       }).catch(err => console.log(err))
                     }
