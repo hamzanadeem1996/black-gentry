@@ -2680,139 +2680,149 @@ export default {
         }).then(async user => {
           //console.log("I foundedddddddddddddddddddd" + JSON.stringify(user));
           if (user) {
-
-            if (body.otp == user.otpOfUser.otp) {
-              console.log("Otp is matched");
-              user.update({
-                status: 'Active'
-              })
-              var token = jwt.issue({ id: user.id }, '1d');
-
-              Login.findOne({
-                where: {
-                  userId: user.id
-                }
-              }).then(loginchk => {
-
-                Users.findOne({
-                  where: {
-                    email: body.email
-                  },
-                  include: {
-                    model: Login,
-                    as: 'loginForUser'
-                  }
-                }).then(checklogin => {
-
-              //    console.log("------------------------->", JSON.stringify(checklogin))
-
-
-                  // console.log("------------------------->", checklogin.dataValues.linkedinId)
-
-                  // console.log("------------------------->", checklogin.dataValues.loginForUser.linkedinId)
-
-                  if (body.linkedinId) {
-
-                    Login.update({
-                      userId: user.id,
-                      auth_token: token,
-                      deviceId: "DeviceID",
-                      socialType: 4,
-                      deviceType: body.deviceType,
-                      devicetoken: body.devicetoken,
-                    }, {
-                      where: {
-                        userId: checklogin.id
-                      }
-                    }).then(async loginemail => {
-                      var checkImage = await getImages(user.id)
-                      if(user.instaToken != null) {
-                        await axios.get('https://graph.instagram.com/me/media?fields=id,media_type,media_url&access_token='+user.instaToken)
-                        .then(function (responses) {
-                          if(responses.data)
-                          res.insta = responses.data.data
-                        })
-                        .catch(function (error) {
-                          // handle error
-                          res.error =error
-                          reject(res)
-                        })
-                      }
-                      res.success = true
-                      res.token = token,
-                        res.user = user,
-                        res.images = checkImage,
-                        res.login = true,
-                        res.message = 'Registered successfully with Linkedin'
-                      resolve(res)
-                      console.log("Login record inserted");
-                    }).catch(err => {
-                      res.message = "Unable to Login 2"
-                      reject(res)
-                    })
-                  }
-                  else {
-                    if (loginchk) {
-                      Login.destroy(
-                        {
-                          where: {
-                            "userId": user.id
-                          }
-                        })
+            Otp.findOne({
+              where: {
+                userId: user.id,
+                isPhoneOtp: 0
+              }
+            }).then(async emailOtp => {
+              if (emailOtp) {
+                if (body.otp == emailOtp.otp) {
+                  console.log("Otp is matched");
+                  user.update({
+                    status: 'Active'
+                  })
+                  var token = jwt.issue({ id: user.id }, '1d');
+    
+                  Login.findOne({
+                    where: {
+                      userId: user.id
                     }
-
-
-                    Login.create({
-                      userId: user.id,
-                      auth_token: token,
-                      deviceId: "DeviceID",
-                      deviceType: body.deviceType,
-                      devicetoken: body.devicetoken,
-                    }).then(async loginemail => {
-                      var checkImage = await getImages(user.id)
-                      if(user.instaToken != null) {
-                        axios.get('https://graph.instagram.com/me/media?fields=id,media_type,media_url&access_token='+user.instaToken)
-                        .then(function (responses) {
-                          if(responses.data)
-                          res.insta = responses.data
-                        })
-                        .catch(function (error) {
-                          // handle error
-                          res.error =error
+                  }).then(loginchk => {
+    
+                    Users.findOne({
+                      where: {
+                        email: body.email
+                      },
+                      include: {
+                        model: Login,
+                        as: 'loginForUser'
+                      }
+                    }).then(checklogin => {
+    
+                  //    console.log("------------------------->", JSON.stringify(checklogin))
+    
+    
+                      // console.log("------------------------->", checklogin.dataValues.linkedinId)
+    
+                      // console.log("------------------------->", checklogin.dataValues.loginForUser.linkedinId)
+    
+                      if (body.linkedinId) {
+    
+                        Login.update({
+                          userId: user.id,
+                          auth_token: token,
+                          deviceId: "DeviceID",
+                          socialType: 4,
+                          deviceType: body.deviceType,
+                          devicetoken: body.devicetoken,
+                        }, {
+                          where: {
+                            userId: checklogin.id
+                          }
+                        }).then(async loginemail => {
+                          var checkImage = await getImages(user.id)
+                          if(user.instaToken != null) {
+                            await axios.get('https://graph.instagram.com/me/media?fields=id,media_type,media_url&access_token='+user.instaToken)
+                            .then(function (responses) {
+                              if(responses.data)
+                              res.insta = responses.data.data
+                            })
+                            .catch(function (error) {
+                              // handle error
+                              res.error =error
+                              reject(res)
+                            })
+                          }
+                          res.success = true
+                          res.token = token,
+                            res.user = user,
+                            res.images = checkImage,
+                            res.login = true,
+                            res.message = 'Registered successfully with Linkedin'
+                          resolve(res)
+                          console.log("Login record inserted");
+                        }).catch(err => {
+                          res.message = "Unable to Login 2"
                           reject(res)
                         })
                       }
-                      res.success = true
-                      res.token = token,
-                        res.user = user,
-                        res.images = checkImage,
-                        res.login = true,
-                        res.message = 'Registered successfully with Email'
-                      resolve(res)
-                      console.log("Login record inserted");
-                    }).catch(err => {
-                      res.message = "Unable to Login 1"
-                      reject(res)
+                      else {
+                        if (loginchk) {
+                          Login.destroy(
+                            {
+                              where: {
+                                "userId": user.id
+                              }
+                            })
+                        }
+    
+    
+                        Login.create({
+                          userId: user.id,
+                          auth_token: token,
+                          deviceId: "DeviceID",
+                          deviceType: body.deviceType,
+                          devicetoken: body.devicetoken,
+                        }).then(async loginemail => {
+                          var checkImage = await getImages(user.id)
+                          if(user.instaToken != null) {
+                            axios.get('https://graph.instagram.com/me/media?fields=id,media_type,media_url&access_token='+user.instaToken)
+                            .then(function (responses) {
+                              if(responses.data)
+                              res.insta = responses.data
+                            })
+                            .catch(function (error) {
+                              // handle error
+                              res.error =error
+                              reject(res)
+                            })
+                          }
+                          res.success = true
+                          res.token = token,
+                            res.user = user,
+                            res.images = checkImage,
+                            res.login = true,
+                            res.message = 'Registered successfully with Email'
+                          resolve(res)
+                          console.log("Login record inserted");
+                        }).catch(err => {
+                          res.message = "Unable to Login 1"
+                          reject(res)
+                        })
+                      }
                     })
-                  }
-                })
-
-
-
-
-              }).catch(err => {
-                console.log(err)
-                res.message = "Something went wrong"
+    
+    
+    
+    
+                  }).catch(err => {
+                    console.log(err)
+                    res.message = "Something went wrong"
+                    reject(res)
+                  })
+    
+                } //profile
+    
+                else {
+                  console.log("Passcode doesn't match");
+                  reject(res)
+                }
+              } else {
+                res.message = "OTP does not exists"
                 reject(res)
-              })
-
-            } //profile
-
-            else {
-              console.log("Passcode doesn't match");
-              reject(res)
-            }
-
+              }
+            })
           } else {
             res.message = 'Email does not exists.'
             // res.error = err
